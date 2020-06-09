@@ -1,5 +1,7 @@
 import Svelte from './index.svelte'
 
-new Svelte({
+const app =new Svelte({
   target: document.body
 })
+
+export default app;

@@ -4,18 +4,27 @@
   "description": "Svelte Tailwind Form  Components",
   "main": "src/index.ts",
   "dependencies": {
+    "parcel-bundler": "^1.12.4",
     "svelte": "^3.23.0",
+    "tailwindcss": "^1.1.4",
+    "tailwindcss-classnames": "^1.3.8",
     "typescript": "^3.9.5"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
     "parcel-plugin-svelte": "^4.0.6",
-    "svelte-preprocess": "^3.9.6"
+    "svelte-preprocess": "^3.9.6",
+    "tailwindcss-truncate-multiline": "^1.0.3",
+    "@fullhuman/postcss-purgecss": "^1.3.0",
+    "autoprefixer": "^9.7.3",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "prettier": "^1.19.1",
+    "prettier-plugin-svelte": "^0.7.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "rm -rf dist && parcel serve src/index.html",
-    "build": "rm -rf dist && parcel build src/index.html"
+    "build": "rm -rf dist && parcel build src/index.html",
+    "generate-custom-types": "npx tailwindcss-classnames"
   },
   "repository": {
     "type": "git",
