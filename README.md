@@ -1,18 +1,5 @@
-# Svelte + Typescript + Parcel
+# Let your opinions count - Sveta
 
-Minimal boilerplate example of Svelte with Typescript using Parcel. This also includes SCSS support
-
-Install packages
-```bash
-$ yarn
-```
-
-Start development server
-```bash
-$ yarn serve
-```
-
-Build for production
-```bash
-$ yarn build
-```
+**Sveta** is a Svelte components kit buiilt with customabilty in mind, 
+pass in your own TailwndCSS classes and get custom unique components.
+Style it your way.
