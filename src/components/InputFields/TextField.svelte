@@ -8,33 +8,22 @@
     box-shadow: 0 0 0px 1000px white inset;
     transition: background-color 5000s ease-in-out 0s;
   }
+
+  input:focus{
+    border-width: 2px;
+  }
+  
 </style>
 
-<script>
-  import { createEventDispatcher } from 'svelte';
+<script lang="typescript">
+  import { createEventDispatcher, onMount } from 'svelte';
   const dispatch = createEventDispatcher();
   let active = false;
-  let defaultLabelStyle = `
-top: 0.75em;
-left: 0.75em;
-transition: transform 0.25s, opacity 0.25s, padding 0.25s ease-in-out;
-transform-origin: 0 0;`;
+  let float = false;
 
-  let floatingStyle = `transform: translate(0, -2em) scale(0.9);`;
-
-  let defaultLabelClass =
-    ' text-gray-600 select-none   leading-none  absolute block p-6  m-0';
-  let normalLabelClass = 'z-10 ';
-  let floatingLabelClass = 'bg-transparent z-30  px-1 pt-3 pb-0 text-sm';
-
-  let defaultInputClass = ` m-0 max-h-64 p-6  lg transition duration-300 ease-in-out overflow-visible block z-20 leading-none relative outline-none bg-white border border-solid rounded-md  `;
-
+  // default classes
   export let id = '';
   export let name = '';
-  export let placeholder = '';
-  const tempHolder = placeholder;
-  export let color = 'purple-500';
-  export const inactiveColor = 'gray-400';
   export let label = '';
   export let value = '';
   export let wrapperClass = '';
@@ -42,12 +31,14 @@ transform-origin: 0 0;`;
   export let inputClass = '';
   export let error = '';
   export let validators = [];
-  export let callback = null;
-  $: {
-    if (!active) placeholder = label;
-    else placeholder = tempHolder;
-  }
-
+  export let onChange = null;
+  export let onFocus = null;
+  export let onBlur = null;
+  export let primaryColor = 'purple-500';
+  export let labelBg = 'bg-white';
+  export let labelColor = `text-${primaryColor}`;
+  export let inactiveColor = 'gray-500';
+  
   $: {
     /*  run validators*/
     validators.forEach(v => {
@@ -56,43 +47,49 @@ transform-origin: 0 0;`;
   }
 </script>
 
-<div class="relative my-1 {wrapperClass}">
+<div class="relative inline-block {wrapperClass}">
   <input
     {id}
     {name}
-    {placeholder}
     bind:value
     on:blur="{() => {
       active = false;
-      dispatch('blur', { active: active });
+      float = value!=="";
+      dispatch('blur');
+      if (onBlur) onBlur();
     }}"
     on:input="{() => {
-      if (callback !== null) callback();
+            dispatch('change');
+      if (onChange) onChange();
     }}"
     on:focus="{() => {
       active = true;
-      dispatch('focus', { active: true });
+         float = true;
+   dispatch('focus');
+      if (onFocus) onFocus();
     }}"
-    class="{defaultInputClass}
-    {active && value !== '' ? `text-${color}  border-${color} ` : `${value !== '' ? 'border-primary text-primary' : ' border-gray-400 text-gray-400'}`}
-    {inputClass}
-    "
     type="text"
+    class="relative z-10 block py-6 px-4 m-0 w-auto leading-none transition
+    duration-300 ease-in-out bg-transparent border  border-solid text-{inactiveColor} 
+    border-{inactiveColor}
+    focus:text-{primaryColor} 
+    focus:border-{primaryColor}
+    rounded-md outline-none h-4 {inputClass}"
   />
   <label
-    for="field-1"
-    class="select-none {defaultLabelClass}
-    {active ? floatingLabelClass : normalLabelClass}
+    for="{id}"
+    class="select-none z-20 text-gray-600 leading-none align-baseline absolute
+    top-2 left-2 inline-block w-auto m-0 p-2 origin-center transition
+    duration-300 { float ? `transform translate-x-0 -translate-y-4 py-0 scale-90 z-30 top-2 ` : ''} {active ? labelColor:'text-gray-400 '}
+    {float ? labelBg : ''}
     {labelClass}
     "
-    style="{defaultLabelStyle}
-    {active ? floatingStyle : normalLabelClass}"
   >
-    {active ? label : placeholder}
+    {label}
   </label>
   {#if error !== ''}
     <div class="block">
-      <p class="py-1 text-xs text-center text-red-600 select-none ">{error}</p>
+      <p class="px-3 py-1 text-xs text-red-600 select-none ">{error}</p>
     </div>
   {/if}
 </div>
