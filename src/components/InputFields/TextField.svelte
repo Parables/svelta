@@ -25,8 +25,7 @@
   export let name = '';
   export let label = '';
   export let value = '';
-  export let leadingIcon = true;
-  export let trailingIcon = false ;
+
   export let wrapperClass = '';
   export let labelClass = '';
   export let inputClass = '';
@@ -35,6 +34,8 @@
   export let onChange = null;
   export let onFocus = null;
   export let onBlur = null;
+  export let leadingIcon = true;
+  export let trailingIcon = false ;
   export let primaryColor = 'purple-500';
   export let labelBg = 'bg-white';
   export let labelColor = `text-${primaryColor}`;
@@ -50,7 +51,10 @@
 
 <div class="relative inline-block {wrapperClass}">
 {#if leadingIcon}
-  <span class="absolute z-20 text-green-400 select-none top-3 left-2">
+  <span class="absolute z-20 text-green-400 select-none top-3 left-2" 
+  on:click="{()=>{
+  dispatch('iconClicked', {icon: 'first'});
+  }}">
     <slot name="leadingIcon">
       <!--Add your icon here <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +116,10 @@
     {label}
   </label>
   {#if trailingIcon}
-  <span class="absolute z-20 select-none top-3 right-2 ">
+  <span class="absolute z-20 select-none top-3 right-2 "
+   on:click="{()=>{
+  dispatch('iconClicked', {icon: 'last'});
+  }}">
     <slot name="trailingIcon">
       <!--   Add your icon here <svg
         xmlns="http://www.w3.org/2000/svg"
