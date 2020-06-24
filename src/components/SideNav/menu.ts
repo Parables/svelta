@@ -1,4 +1,4 @@
-import { icon_name } from "src/assets/svgs
+import { icon_name } from "src/assets/svgs"
 
 interface menuList {
 	group: string
@@ -62,12 +62,29 @@ interface routes {
 		routes: [
 			{
 				route: "/courses",
-				name: "Courses",
+				name: "Courses", icon: "circle",
 				title: "View, create, manage, assign and schedule courses"
 			}, {
 				route: "/programmes",
-				name: "Programmes",
-				title: "View, create and manage programmes"
+				name: "Programmes", icon: "circle",
+				title: "View, create and manage programmes",
+				subRoutes: [
+					{
+						route: "/allBooks",
+						name: "All Books", icon: "circle",
+						title: "View all books"
+					},
+					{
+						route: "/issueBooks",
+						name: "Issue Books", icon: "circle",
+						title: "Record books given to students"
+					},
+					{
+						route: "newStock",
+						name: "New Stock", icon: "circle",
+						title: "Record books recieved"
+					}
+				]
 			}]
 	},
 	{
@@ -75,19 +92,19 @@ interface routes {
 		routes: [
 			{
 				route: "/students",
-				name: "Students",
+				name: "Students", icon: "circle",
 				title: "View and manage students data"
 			}, {
 				route: "/teachers",
-				name: "teachers",
+				name: "teachers", icon: "circle",
 				title: "View and manage teachers data"
 			}, {
 				route: "/yeargroups",
-				name: "Year Groups",
+				name: "Year Groups", icon: "circle",
 				title: "View students by year groups"
 			}, {
 				route: "/staff",
-				name: "Staff",
+				name: "Staff", icon: "circle",
 				title: "View and manage staff data"
 			}]
 	}, {
@@ -105,12 +122,12 @@ interface routes {
 			},
 			{
 				route: "/events",
-				name: "Events",
+				name: "Events", icon: "circle",
 				title: "Create and management events"
 			},
 			{
 				route: "/todos",
-				name: "Todos",
+				name: "Todos", icon: "circle",
 				title: "Create reminders for important things to be done"
 			}]
 	},
@@ -120,12 +137,12 @@ interface routes {
 		routes: [
 			{
 				route: "/fees",
-				name: "Fees Management",
+				name: "Fees Management", icon: "circle",
 				title: "Record installments of fee payment, search reciepts, generate reports"
 			},
 			{
 				route: "/transactions",
-				name: "Transactions",
+				name: "Transactions", icon: "circle",
 				title: "Record expenses and revenue and generate reports"
 			}
 
