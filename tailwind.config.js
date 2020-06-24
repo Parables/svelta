@@ -1,25 +1,26 @@
+const spacing = require('./src/tailwindcss/spacing')
+
 module.exports = {
   purge: [],
   theme: {
     extend: {
       inset:theme => ({
-        '1': '0.25rem',
-        '2': '0.5rem',
-        '3': '0.75rem',
-        '4': '1rem',
-        '5': '1.25rem',
-        '6': '1.5rem',
-        '8': '2rem',
-        '10': '2.5rem',
-        '12': '3rem',
-        '16': '4rem',
-        '20': '5rem',
-        '24': '6rem',
-        '32': '8rem',
-        '40': '10rem',
-        '48': '12rem',
-        '56': '14rem',
-        '64': '16rem',      })
+        ...theme('spacing'),
+          }),
+        ...spacing,
+        fontFamily: {
+          'mons': 'Montserrat,Helvetica,Arial,sans-serif'
+        },
+        colors:{
+          primary:'#7367F0', 
+          success:'#28C76F',
+          danger: '#EA5455',
+          warning:'#FF9F43',
+          cadetblue: '#C2C6DC',
+          haiti:'#10163A',
+          comet: '#252C49',
+          cararra: '#DDE8FD'
+        }
     },
   },
   variants: {},

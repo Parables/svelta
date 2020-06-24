@@ -1,12 +1,15 @@
+import { icon_name } from "src/assets/svgs
+
 interface menuList {
-	heading: string
+	group: string
 	routes: Array<routes>
 }
 
 interface routes {
-	route: String
-	name: String
-	title?: String
+	route: string
+	name: string
+	icon?: icon_name
+	title?: string
 	subRoutes?: Array<routes>
 	data?: any
 	params?: any
@@ -15,39 +18,39 @@ interface routes {
 
  const MenuList: Array<menuList> = [
 	{
-		heading: "HOME",
+		group: "HOME",
 		routes: [
 			{
 				route: "/",
-				name: "Dashboard",
+				name: "Dashboard", icon:"activity",
 				title: "View statistics of attendance and overview , events, notifications and issues"
 			}, {
 				route: "/messages",
-				name: "Messsages",
+				name: "Messsages", icon:"message",
 				title: "Communicate with student, resolve issues and complain, addess sugggestions"
 			}]
 	},
 	{
-		heading: "INVENTORY",
+		group: "INVENTORY",
 		routes: [
 			{
 				route: "/books",
-				name: "Books",
+				name: "Books", icon: "book",
 				title: "View,Add add record stock of books",
 				subRoutes: [
 					{
 						route: "/allBooks",
-						name: "All Books",
+						name: "All Books", icon: "circle",
 						title: "View all books"
 					},
 					{
 						route: "/issueBooks",
-						name: "Issue Books",
+						name: "Issue Books", icon: "circle",
 						title: "Record books given to students"
 					},
 					{
 						route: "newStock",
-						name: "New Stock",
+						name: "New Stock", icon: "circle",
 						title: "Record books recieved"
 					}
 				]
@@ -55,7 +58,7 @@ interface routes {
 		]
 	},
 	{
-		heading: "ACADEMICS",
+		group: "ACADEMICS",
 		routes: [
 			{
 				route: "/courses",
@@ -68,7 +71,7 @@ interface routes {
 			}]
 	},
 	{
-		heading: "PEOPLE",
+		group: "PEOPLE",
 		routes: [
 			{
 				route: "/students",
@@ -88,16 +91,16 @@ interface routes {
 				title: "View and manage staff data"
 			}]
 	}, {
-		heading: "SCHEDULE",
+		group: "SCHEDULE",
 		routes: [
 			{
 				route: "/timetable",
-				name: "Timetable",
+				name: "Timetable",icon: "clock",
 				title: "organise lecturers for the acadaemic year"
 			},
 			{
 				route: "/calendar",
-				name: "Calendar",
+				name: "Calendar",icon: "calendar",
 				title: "Overview of scheduled events"
 			},
 			{
@@ -113,7 +116,7 @@ interface routes {
 	},
 
 	{
-		heading: "FINANCIAL",
+		group: "FINANCIAL",
 		routes: [
 			{
 				route: "/fees",

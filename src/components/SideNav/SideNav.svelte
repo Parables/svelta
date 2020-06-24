@@ -1,36 +1,52 @@
-<script lang="typescript">
+<script>
+  import { logo } from '../../assets/logo.ts';
   import { Menu } from './menu';
+  import { SVG, icon_name } from '../../assets/svgs.ts';
 </script>
 
-<style>
-.theme{
-background-color:#252c49; 
-}
+<!-- Side Menu -->
+<div class="absolute top-0 left-0 flex flex-col w-64 h-screen bg-haiti">
+  <div class="py-8 px4">
+    <slot name="header">
+      <div class="flex items-center justify-between pr-4 cursor-pointer">
+        <span>
+          {@html logo}
+        </span>
+        <div class="px-2 text-lg font-semibold font-mons text-cararra">
+          Idel-Sekondi
+        </div>
+        <div>
+          <span
+            class="relative cursor-pointer select-none feather-icon"
+            id="toggleMenu"
+          >
+            {@html SVG('disc', 'stroke-current text-primary w-5 h-5')}
+          </span>
+        </div>
+      </div>
+    </slot>
+  </div>
 
-</style>
-<div class="flex">
-  <div class="top-0 left-0 flex flex-col h-screen bg-blue-800">
-    <div class="">
-      <ul class="menu-heading">
-        {#each Menu as m, mIndex}
-          <li class="menu-routes">
-            {m.heading}
-            <ul>
-              {#each Array(m.routes.length) as r, rIndex}
-                <li class="menu-route">
-                  {m.routes[rIndex].name}
-                </li>
-              {/each}
-            </ul>
-          </li>
-        {/each}
-      </ul>
+  {#each Menu as g, i}
+    <div class="menu-group">
+      {g.group}
+      <div class="menu-items">
+        <div class="menu-sub-items"></div>
+      </div>
     </div>
-  </div>
-  <div class="w-full overflow-y-auto theme">
-  <div class="px-2 py-3 border border-gray-100 rounded-md theme">
-  
-  Main content
-  </div>
+  {/each}
+
+</div>
+
+<div class="px-10 ml-64 bg-transparent ">
+  <div class="">
+    <div class="justify-between px-2 py-3 rounded-md border-primary bg-haiti">
+      <div class="flex align-middle inlne">
+        {@html SVG('bell', 'text-cadetblue')}
+        {@html SVG('check_square', 'text-cadetblue')}
+        {@html SVG('check_square', 'text-cadetblue')}
+        {@html SVG('check_square', 'text-cadetblue')}
+      </div>
+    </div>
   </div>
 </div>
