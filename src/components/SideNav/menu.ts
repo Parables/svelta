@@ -16,17 +16,17 @@ interface routes {
 	query?: any
 }
 
- const MenuList: Array<menuList> = [
+const MenuList: Array<menuList> = [
 	{
 		group: "HOME",
 		routes: [
 			{
 				route: "/",
-				name: "Dashboard", icon:"activity",
+				name: "Dashboard", icon: "activity",
 				title: "View statistics of attendance and overview , events, notifications and issues"
 			}, {
 				route: "/messages",
-				name: "Messsages", icon:"message",
+				name: "Messsages", icon: "message",
 				title: "Communicate with student, resolve issues and complain, addess sugggestions"
 			}]
 	},
@@ -62,11 +62,11 @@ interface routes {
 		routes: [
 			{
 				route: "/courses",
-				name: "Courses", icon: "circle",
+				name: "Courses", icon: "atom",
 				title: "View, create, manage, assign and schedule courses"
 			}, {
 				route: "/programmes",
-				name: "Programmes", icon: "circle",
+				name: "Programmes", icon: "certificate",
 				title: "View, create and manage programmes",
 				subRoutes: [
 					{
@@ -92,19 +92,28 @@ interface routes {
 		routes: [
 			{
 				route: "/students",
-				name: "Students", icon: "circle",
-				title: "View and manage students data"
+				name: "Students", icon: "student",
+				title: "View and manage students data",
+				subRoutes: [{
+					route: "/view",
+					name: "View Students", icon: "circle",
+					title: "View all student records"
+				}, {
+					route: "/register",
+					name: "Register Student", icon: "circle",
+					title: "Create a new student record"
+				}, {
+					route: "/yeargroups",
+					name: "Year Groups", icon: "circle",
+					title: "View students by year groups"
+				},]
 			}, {
 				route: "/teachers",
-				name: "teachers", icon: "circle",
+				name: "teachers", icon: "teacher",
 				title: "View and manage teachers data"
 			}, {
-				route: "/yeargroups",
-				name: "Year Groups", icon: "circle",
-				title: "View students by year groups"
-			}, {
 				route: "/staff",
-				name: "Staff", icon: "circle",
+				name: "Staff", icon: "staff",
 				title: "View and manage staff data"
 			}]
 	}, {
@@ -112,22 +121,16 @@ interface routes {
 		routes: [
 			{
 				route: "/timetable",
-				name: "Timetable",icon: "clock",
+				name: "Timetable", icon: "clock",
 				title: "organise lecturers for the acadaemic year"
-			},
-			{
-				route: "/calendar",
-				name: "Calendar",icon: "calendar",
-				title: "Overview of scheduled events"
-			},
-			{
+			},			{
 				route: "/events",
-				name: "Events", icon: "circle",
+				name: "Events", icon: "calendar",
 				title: "Create and management events"
 			},
 			{
 				route: "/todos",
-				name: "Todos", icon: "circle",
+				name: "Todos", icon: "check_square",
 				title: "Create reminders for important things to be done"
 			}]
 	},
@@ -151,4 +154,4 @@ interface routes {
 ]
 
 
-export  const Menu = MenuList;
+export const Menu = MenuList;
