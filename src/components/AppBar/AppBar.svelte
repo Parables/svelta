@@ -13,6 +13,7 @@
 <script lang="typescript">
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
+  import { TOGGLE_ICON } from '../../main_store';
   import { SVG, icon_name } from '../../assets/svgs';
   import { FavIcon } from './icons';
   export let search = '';
