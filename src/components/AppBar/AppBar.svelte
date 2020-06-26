@@ -16,7 +16,7 @@
   import { SVG, icon_name } from '../../assets/svgs';
   import { FavIcon } from './icons';
   export let search = '';
-  export let currentUser = 'Emmanuel Botchey';
+  export let currentUser = 'Emmanuel';
   export let status = 'Service';
   export let favoriteIcons: Array<FavIcon> = [
     { name: 'message' },
@@ -63,9 +63,10 @@
     </div>
   {:else}
     <div class="inline-flex items-center align-middle">
-      <span on:click="{() => dispatch('toggle')}">
+      <span class="lg:hidden" on:click="{() => dispatch('toggle')}">
         {@html SVG('menu', 'text-cadetblue w-6 h-6 hover:text-primary')}
       </span>
+      <span class="hidden lg:inline-flex">
       <slot name="favoriteIcons">
         {#each favoriteIcons as icon}
           <span on:click="{() => icon.callback()}">
@@ -73,6 +74,7 @@
           </span>
         {/each}
       </slot>
+      </span>
 
     </div>
     <div class="inline-flex items-center align-middle ">
@@ -84,8 +86,10 @@
       >
         {@html SVG('search', 'text-cadetblue w-6 h-6 hover:text-primary ')}
       </span>
-      {@html SVG('bell', 'text-cadetblue w-6 h-6 hover:text-primary ')}
-      <div class="flex flex-col mx-2">
+   <span class="hidden lg:block">
+    {@html SVG('bell', 'text-cadetblue w-6 h-6 hover:text-primary ')}
+   </span>  
+      <div class="flex-col hidden mx-2 lg:flex ">
         <span
           class="text-sm font-semibold leading-5 select-none text-cadetblue"
         >
@@ -97,6 +101,8 @@
           {status}
         </span>
       </div>
+      <div class="inline-flex items-center w-10 h-10 mx-2 align-middle border-0 rounded-full select-none bg-comet ">
+      <span class="self-center mx-auto font-semibold text-cadetblue">A</span></div>
     </div>
   {/if}
 </div>
