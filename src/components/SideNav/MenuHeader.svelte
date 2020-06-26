@@ -19,7 +19,7 @@
   }
 </script>
 
-<div class="pt-10 pb-4 px4">
+<div class="pt-10 pb-4 transition-all duration-300 ease-in-out px4">
   <slot name="header">
     <div
       class="flex items-center justify-between pr-4 cursor-pointer"

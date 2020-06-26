@@ -5,7 +5,7 @@
   import MenuItem from './MenuItem.svelte';
 </script>
 
-<div class="overflow-y-auto ">
+<div class="overflow-y-auto transition-all duration-300 ease-in-out ">
   <!-- Menu Group Headers -->
   {#each Menu as g, i}
     {#if $MENU_WIDTH === '75'}
@@ -17,7 +17,7 @@
         </span>
       </div>
     {/if}
-    <div class="menu-items">
+    <div class="flex flex-col menu-items">
       {#each g.routes as r, i}
         <!-- Menu Items -->
         <MenuItem type="parent" route="{r}" full="{$MENU_WIDTH === '75'}" />
@@ -32,7 +32,7 @@
   {/each}
   {#if $MENU_WIDTH === '75'}
     <div
-      class="flex flex-col items-center content-center pt-4 pb-8 mx-auto text-xs text-center text-cadetblue "
+      class="flex flex-col items-center content-center pt-4 pb-8 mx-auto text-xs text-center transition-all duration-300 ease-in-out text-cadetblue"
     >
       <div>
         Made with

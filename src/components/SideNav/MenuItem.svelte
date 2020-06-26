@@ -1,41 +1,44 @@
 <script lang="typescript">
   type menu_type = 'parent' | 'child';
   import { SVG, icon_name } from '../../assets/svgs';
+  import { MENU_WIDTH } from '../../main_store';
   export let route;
-  export let full = false;
-  export let type: menu_type = 'parent';
+  export let type: menu_type;
   export let location = 'Programmes All Books';
-  let color = 'bg-comet';
+  let color;
   $: {
     if (location.toLowerCase().includes(route.name.toLowerCase())) {
-      if (type === 'parent') color = 'bg-comet';
+      if (type === 'parent') color = 'bg-comet ';
       else color = 'bg-primary';
     } else color = 'bg-transparent';
   }
+  let full: boolean;
+  $: {
+    full = $MENU_WIDTH === '75';
+  }
+  let hovering:boolean
 </script>
 
-<div
-  class="flex align-middle justify-between p-2 mb-2 mr-4 ml-2 cursor-pointer
-  outline-none rounded-md select-none {color}"
+<div on:mousemove="{()=> hovering= true}" on:mouseout="{()=> hovering= false}"
+  class="inline-flex items-center justify-between p-2 mb-2 cursor-pointer ml-4
+  mr-4  outline-none rounded-md select-none transition-all
+  duration-300 ease-in-out {color}"
 >
-  <div>
+  <div class="items-center transform {hovering?'translate-x-2 transition-all duration-300 ease-linear':'translate-x-0 transition-all duration-300 ease-linear'} " id="menu-item">
     <span>
-      {@html SVG(type === 'parent' ? route.icon : 'circle', `text-cadetblue inline-flex ${type === 'parent' ? 'w-5 h-5' : 'w-3 h-3 ml-3 '}  `)}
+      {@html SVG(type === 'parent' ? route.icon : 'circle', `text-cadetblue ${type === 'parent' ? 'w-5 h-5' : 'w-3 h-3'} inline-flex `)}
     </span>
     {#if full}
       <span
-        class="{type === 'parent' && full ? 'pl-2' : 'pl-3'} text-base
-        font-normal leading-3 text-cadetblue"
+        class="inline-flex font-normal transition-all duration-300 ease-in-out text-cadetblue"
       >
         {route.name}
       </span>
     {/if}
   </div>
   {#if full}
-    <div class="">
-      <span>
-        {@html SVG('chevron_right', `text-cadetblue inline-flex w-5 h-5 ${full && route.subRoutes ? 'visible' : 'invisible'}`)}
-      </span>
-    </div>
+    <span>
+      {@html SVG('chevron_right', `inline-flex text-cadetblue w-5 h-5 ${full && route.subRoutes ? 'visible' : 'invisible'}`)}
+    </span>
   {/if}
 </div>

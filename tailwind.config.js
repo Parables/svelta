@@ -20,6 +20,9 @@ module.exports = {
           haiti:'#10163A',
           comet: '#252C49',
           cararra: '#DDE8FD'
+        },
+        transitionProperty: {
+        width: 'width'
         }
     },
   },
