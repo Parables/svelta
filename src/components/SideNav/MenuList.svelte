@@ -5,45 +5,43 @@
   import MenuItem from './MenuItem.svelte';
 </script>
 
-<div class="overflow-y-auto transition-all duration-300 ease-in-out ">
+<div class="block overflow-y-auto select-none menu-body text-cadetblue ">
   <!-- Menu Group Headers -->
-  {#each Menu as g, i}
-    {#if $MENU_WIDTH === '75'}
-      <div class=" menu-group text-cadetblue">
+  {#each Menu as g, h}
+    <div class="block select-none menu-group ">
+      {#if $MENU_WIDTH === '75'}
         <span
-          class="block mt-8 mb-3 ml-6 text-xs font-medium leading-5 tracking-tight uppercase select-none"
+          class="block mt-8 mb-3 ml-6 text-xs font-medium leading-5 tracking-tight uppercase select-none group-name "
         >
           {g.group}
         </span>
-      </div>
-    {/if}
-    <div class="flex flex-col menu-items">
+      {/if}
       {#each g.routes as r, i}
-        <!-- Menu Items -->
-        <MenuItem type="parent" route="{r}" full="{$MENU_WIDTH === '75'}" />
-        {#if $MENU_WIDTH === '75' && r.subRoutes}
-          {#each r.subRoutes as s, j}
-            <!-- Menu SubRoutes -->
-            <MenuItem type="child" route="{s}" full="{$MENU_WIDTH === '75'}" />
-          {/each}
-        {/if}
+        <MenuItem type="parent" route="{r}">
+          {#if $MENU_WIDTH === '75' && r.subRoutes}
+            {#each r.subRoutes as s, j}
+              <MenuItem type="child" route="{s}" />
+            {/each}
+          {/if}
+        </MenuItem>
       {/each}
     </div>
   {/each}
-  {#if $MENU_WIDTH === '75'}
-    <div
-      class="flex flex-col items-center content-center pt-4 pb-8 mx-auto text-xs text-center transition-all duration-300 ease-in-out text-cadetblue"
-    >
-      <div>
-        Made with
-        {@html SVG('heart', 'w-4 h-4 inline-flex')}
-        by
-      </div>
-      <div>
-        <a href="https://github.com/Parables" class="mx-2 no-underline ">
-          Parables Boltnoel &copy; {new Date().getFullYear()}
-        </a>
-      </div>
-    </div>
-  {/if}
 </div>
+
+{#if $MENU_WIDTH === '75'}
+  <div
+    class="flex flex-col items-center content-center pt-4 pb-8 mx-auto text-xs text-center menu-footer text-cadetblue"
+  >
+    <div>
+      Made with
+      {@html SVG('heart', 'w-4 h-4 inline-flex')}
+      by
+    </div>
+    <div>
+      <a href="https://github.com/Parables" class="mx-2 no-underline ">
+        Parables Boltnoel &copy; {new Date().getFullYear()}
+      </a>
+    </div>
+  </div>
+{/if}

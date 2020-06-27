@@ -19,51 +19,46 @@
   }
 </script>
 
-<div class="pt-10 pb-4 transition-all duration-300 ease-in-out px4">
-  <slot name="header">
-    <div
-      class="flex items-center justify-between pr-4 cursor-pointer"
-      on:click="{() => {}}"
-    >
-      <slot name="logo">
-        <span>
-          {@html logo}
+<slot>
+  <div
+    class="flex items-center justify-between pt-10 pb-4 cursor-pointer select-none menu-header"
+    on:click="{() => {}}"
+  >
+    <slot name="logo">
+      <span class="logo">
+        {@html logo}
+      </span>
+    </slot>
+    {#if $MENU_WIDTH === '75'}
+      <span
+        class="px-2 text-lg font-semibold select-none logo-name font-mons text-cararra"
+      >
+        <slot name="logo-name">Idel-Sekondi</slot>
+      </span>
+      <slot name="menu-toggle ">
+        <span
+          class="mr-3 cursor-pointer select-none menu-toggle"
+          on:click="{() => {
+            if ($APP_WIDTH >= 1024) {
+              if ($MARGIN_LEFT === '75') {
+                MARGIN_LEFT.set('20');
+                MINI_MENU.set(true);
+              } else {
+                MARGIN_LEFT.set('75');
+                MINI_MENU.set(false);
+              }
+            } else {
+              MENU_WIDTH.set('75');
+              MARGIN_LEFT.set('20');
+              MINI_MENU.set(false);
+              open = false;
+              dispatch('toggle', false);
+            }
+          }}"
+        >
+          {@html SVG($TOGGLE_ICON, 'stroke-current hover:text-primary text-cararra w-5 h-5')}
         </span>
       </slot>
-      {#if $MENU_WIDTH === '75'}
-        <div
-          class="px-2 text-lg font-semibold select-none font-mons text-cararra"
-        >
-          <slot name="logo-name">Idel-Sekondi</slot>
-        </div>
-        <div>
-          <slot name="menu-toggle">
-            <span
-              class="cursor-pointer select-none "
-              id="toggleMenu"
-              on:click="{() => {
-                if ($APP_WIDTH >= 1024) {
-                  if ($MARGIN_LEFT === '75') {
-                    MARGIN_LEFT.set('20');
-                    MINI_MENU.set(true);
-                  } else {
-                    MARGIN_LEFT.set('75');
-                    MINI_MENU.set(false);
-                  }
-                } else {
-                  MENU_WIDTH.set('75');
-                  MARGIN_LEFT.set('20');
-                  MINI_MENU.set(false);
-                  open = false;
-                  dispatch('toggle', false);
-                }
-              }}"
-            >
-              {@html SVG($TOGGLE_ICON, 'stroke-current hover:text-primary text-cararra w-5 h-5')}
-            </span>
-          </slot>
-        </div>
-      {/if}
-    </div>
-  </slot>
-</div>
+    {/if}
+  </div>
+</slot>

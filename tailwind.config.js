@@ -22,7 +22,8 @@ module.exports = {
           cararra: '#DDE8FD'
         },
         transitionProperty: {
-        width: 'width'
+        width: 'width',
+        display: 'display'
         }
     },
   },
