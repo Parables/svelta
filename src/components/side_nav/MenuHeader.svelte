@@ -21,7 +21,7 @@
 
 <slot>
   <div
-    class="flex items-center justify-between pt-10 pb-4 cursor-pointer select-none menu-header"
+    class="flex items-center justify-between pt-3 pb-1 cursor-pointer select-none menu-header"
     on:click="{() => {}}"
   >
     <slot name="logo">

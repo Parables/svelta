@@ -14,7 +14,7 @@
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
   import { fly, fade } from 'svelte/transition';
-  import { TOGGLE_ICON } from '../../main_store';
+  import { TOGGLE_ICON, MARGIN_LEFT } from '../../main_store';
   import { SVG, icon_name } from '../../assets/svgs';
   import { FavIcon } from './icons';
   export let search = '';
@@ -36,42 +36,43 @@
 </script>
 
 <!-- App Bar -->
-<div class="flex justify-between p-4 mt-4 rounded-md border-primary bg-haiti">
+<div 
+  class="flex justify-between px-2 py-3"
+>
   {#if searching}
-  <div class="flex items-center w-full" in:fly="{{ x: 20, duration: 500 }}">
-    <div
-      class="flex items-center flex-1 "
-    
-    >
-      <span class="inline">
-        {@html SVG('search', 'text-cadetblue w-6 h-6  ')}
-      </span>
-      <input
-        type="text"
-        name="search"
-        id="search"
-        placeholder="Search for..."
-        bind:value="{search}"
-        class="flex-1 w-full h-10 bg-transparent border-0 outline-none text-cadetblue"
-        on:input="{() => dispatch('search')}"
-        on:focus="{() => dispatch('focus')}"
-      />
+    <div class="flex items-center w-full" in:fly="{{ x: 20, duration: 500 }}">
+      <div class="flex items-center flex-1 ">
+        <span class="inline">
+          {@html SVG('search', 'text-cadetblue w-6 h-6  ')}
+        </span>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search for..."
+          bind:value="{search}"
+          class="flex-1 w-full h-10 bg-transparent border-0 outline-none text-cadetblue"
+          on:input="{() => dispatch('search')}"
+          on:focus="{() => dispatch('focus')}"
+        />
+      </div>
+      <div>
+        <span
+          class="inline"
+          on:click="{() => {
+            searching = false;
+            dispatch('dismiss');
+          }}"
+        >
+          {@html SVG('close', 'text-cadetblue w-6 h-6 hover:text-primary')}
+        </span>
+      </div>
     </div>
-    <div>
-      <span
-        class="inline"
-        on:click="{() => {
-          searching = false;
-          dispatch('dismiss');
-        }}"
-      >
-        {@html SVG('close', 'text-cadetblue w-6 h-6 hover:text-primary')}
-      </span>
-    </div>
-  </div>
   {:else}
-    <div class="inline-flex items-center align-middle" 
-    in:fly="{{ x: -20, duration: 500 }}">
+    <div
+      class="inline-flex items-center align-middle"
+      in:fly="{{ x: -20, duration: 500 }}"
+    >
       <span class="lg:hidden" on:click="{() => dispatch('toggle')}">
         {@html SVG('menu', 'text-cadetblue w-6 h-6 hover:text-primary')}
       </span>
@@ -86,7 +87,10 @@
       </span>
 
     </div>
-    <div class="inline-flex items-center align-middle " in:fly="{{ x: 20, duration: 500 }}">
+    <div
+      class="inline-flex items-center align-middle "
+      in:fly="{{ x: 20, duration: 500 }}"
+    >
       <span
         on:click="{() => {
           searching = true;
@@ -111,9 +115,11 @@
         </span>
       </div>
       <div
-        class="inline-flex items-center w-10 h-10 mx-2 align-middle border-0 rounded-full select-none bg-comet "
+        class="inline-flex items-center w-10 h-10 mx-2 align-middle border-0 rounded-full select-none bg-primary "
       >
-        <span class="self-center mx-auto font-semibold text-cadetblue"><slot name="avartar">A</slot></span>
+        <span class="self-center mx-auto font-semibold text-cadetblue">
+          <slot name="avartar">A</slot>
+        </span>
       </div>
     </div>
   {/if}
