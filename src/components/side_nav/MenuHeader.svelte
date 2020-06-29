@@ -29,7 +29,7 @@
         {@html logo}
       </span>
     </slot>
-    {#if $MENU_WIDTH === '75'}
+    {#if $MENU_WIDTH === '70'}
       <span
         class="px-2 text-lg font-semibold select-none logo-name font-mons text-cararra"
       >
@@ -40,15 +40,15 @@
           class="mr-3 cursor-pointer select-none menu-toggle"
           on:click="{() => {
             if ($APP_WIDTH >= 1024) {
-              if ($MARGIN_LEFT === '75') {
+              if ($MARGIN_LEFT === '70') {
                 MARGIN_LEFT.set('20');
                 MINI_MENU.set(true);
               } else {
-                MARGIN_LEFT.set('75');
+                MARGIN_LEFT.set('70');
                 MINI_MENU.set(false);
               }
             } else {
-              MENU_WIDTH.set('75');
+              MENU_WIDTH.set('70');
               MARGIN_LEFT.set('20');
               MINI_MENU.set(false);
               open = false;

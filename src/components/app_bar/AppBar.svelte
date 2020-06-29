@@ -13,6 +13,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
+  import { push, pop } from "svelte-spa-router";
   import { fly, fade } from 'svelte/transition';
   import { TOGGLE_ICON, MARGIN_LEFT } from '../../main_store';
   import { SVG, icon_name } from '../../assets/svgs';
@@ -22,12 +23,14 @@
   export let status = 'Service';
   export let favoriteIcons = [
     // Array<FavIcon>
-    { name: 'message' },
+    { name: 'message' ,  callback: () => {
+       push('/books/id/false');
+      }},
     { name: 'check_square' },
     {
       name: 'mail',
       callback: () => {
-        console.log('checking mail');
+       push('/books/id/true');
       }
     },
     { name: 'star', classNames: 'text-warning focus:fill-current' }

@@ -1,55 +1,55 @@
 import { icon_name } from "src/assets/svgs"
+import PageOne from "../pages/PageOne.svelte";
 
-interface menuList {
+export interface MenuList {
 	group: string
-	routes: Array<routes>
+	routes: Route[]
 }
 
-interface routes {
-	route: string
+export interface Param {
+	param: string
+	name:string
+	component: any
+}
+
+export interface Route {
+	path: string
 	name: string
 	icon?: icon_name
 	title?: string
-	subRoutes?: Array<routes>
+	component?: any
+	subRoutes?: Route[]
 	data?: any
-	params?: any
+	params?: Param[]
 	query?: any
 }
 
-const MenuList: Array<menuList> = [
+const MenuList: Array<MenuList> = [
 	{
 		group: "HOME",
 		routes: [
 			{
-				route: "/",
-				name: "Dashboard", icon: "activity",
+				path: "/",
+				name: "Dashboard", icon: "activity", component: PageOne,
 				title: "View statistics of attendance and overview , events, notifications and issues"
-			}, {
-				route: "/messages",
-				name: "Messsages", icon: "message",
-				title: "Communicate with student, resolve issues and complain, addess sugggestions"
 			}]
 	},
 	{
 		group: "INVENTORY",
 		routes: [
 			{
-				route: "/books",
+				path: "/books",
 				name: "Books", icon: "book",
-				title: "View,Add add record stock of books",
+				title: "View, add and record stock of books",
+				params: [{ param: '/:id/:new?',name:'New Book,Edit Book,Book Info', component: PageOne }],
 				subRoutes: [
 					{
-						route: "/allBooks",
-						name: "All Books", icon: "circle",
-						title: "View all books"
-					},
-					{
-						route: "/issueBooks",
+						path: "/issueBooks",
 						name: "Issue Books", icon: "circle",
 						title: "Record books given to students"
 					},
 					{
-						route: "newStock",
+						path: "/newStock",
 						name: "New Stock", icon: "circle",
 						title: "Record books recieved"
 					}
@@ -61,77 +61,58 @@ const MenuList: Array<menuList> = [
 		group: "ACADEMICS",
 		routes: [
 			{
-				route: "/courses",
+				path: "/courses",
 				name: "Courses", icon: "atom",
-				title: "View, create, manage, assign and schedule courses"
+				title: "View, create, manage, assign and schedule courses",
+				params: [{ param: '/:id/:new?',name:'New Course,Edit Course,Course Info', component: PageOne }],
 			}, {
-				route: "/programmes",
+				path: "/programmes",
 				name: "Programmes", icon: "certificate",
 				title: "View, create and manage programmes",
-				subRoutes: [
-					{
-						route: "/allBooks",
-						name: "All Books", icon: "circle",
-						title: "View all books"
-					},
-					{
-						route: "/issueBooks",
-						name: "Issue Books", icon: "circle",
-						title: "Record books given to students"
-					},
-					{
-						route: "newStock",
-						name: "New Stock", icon: "circle",
-						title: "Record books recieved"
-					}
-				]
+				params: [{ param: '/:id/:new?',name:'New Programme,Edit Programme,Programme Info', component: PageOne }],
 			}]
 	},
 	{
 		group: "PEOPLE",
-		routes: [
-			{
-				route: "/students",
-				name: "Students", icon: "student",
-				title: "View and manage students data",
-				subRoutes: [{
-					route: "/view",
-					name: "View Students", icon: "circle",
-					title: "View all student records"
-				}, {
-					route: "/register",
-					name: "Register Student", icon: "circle",
-					title: "Create a new student record"
-				}, {
-					route: "/yeargroups",
-					name: "Year Groups", icon: "circle",
-					title: "View students by year groups"
-				},]
-			}, {
-				route: "/teachers",
-				name: "teachers", icon: "teacher",
-				title: "View and manage teachers data"
-			}, {
-				route: "/staff",
-				name: "Staff", icon: "staff",
-				title: "View and manage staff data"
-			}]
+		routes: [{
+			path: "/messages",
+			name: "Messsages", icon: "message",
+			title: "Communicate with people, resolve issues and complains, address sugggestions"
+		},
+		{
+			path: "/students",
+			name: "Students", icon: "student",
+			title: "View and manage students data",
+			params: [{ param: '/:id/:new?',name:'Register Student,Edit Student,Student Profile', component: PageOne }]
+		}, {
+			path: "/teachers",
+			name: "Lecturers", icon: "teacher",
+			title: "View and manage teachers data",
+			params: [{ param: '/:id/:new?',name:'New Lecturer,Edit Lecturer,Lecturer Profile', component: PageOne }],
+		}, {
+			path: "/staff",
+			name: "Staff", icon: "staff",
+			title: "View and manage staff data",
+			params: [{ param: '/:id/:new?',name:'New Lecturer,Edit Lecturer,Lecturer Profile', component: PageOne }],
+		}]
 	}, {
 		group: "SCHEDULE",
 		routes: [
 			{
-				route: "/timetable",
+				path: "/timetable",
 				name: "Timetable", icon: "clock",
-				title: "organise lecturers for the acadaemic year"
-			},			{
-				route: "/events",
+				title: "organise lecturers for the acadaemic year",
+			}, {
+				path: "/events",
 				name: "Events", icon: "calendar",
-				title: "Create and management events"
+				title: "Create and management events",
+				params: [{ param: '/:id/:new?',name:'New Event,Edit Event,Event Details', component: PageOne }],
 			},
 			{
-				route: "/todos",
+				path: "/todos",
 				name: "Todos", icon: "check_square",
-				title: "Create reminders for important things to be done"
+				title: "Create reminders for important things to be done",
+				params: [{ param: '/:id/:new?',name:'New Todo,Edit Todo,View Todos', component: PageOne }]
 			}]
 	},
 
@@ -139,14 +120,14 @@ const MenuList: Array<menuList> = [
 		group: "FINANCIAL",
 		routes: [
 			{
-				route: "/fees",
-				name: "Fees Management", icon: "circle",
-				title: "Record installments of fee payment, search reciepts, generate reports"
+				path: "/fees",
+				name: "Fees Records", icon: "circle",
+				title: "Record installments of fee payment, search reciepts, generate reports",
 			},
 			{
-				route: "/transactions",
+				path: "/transactions",
 				name: "Transactions", icon: "circle",
-				title: "Record expenses and revenue and generate reports"
+				title: "Record expenses and revenue and generate reports",
 			}
 
 		]

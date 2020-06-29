@@ -1,5 +1,6 @@
 <script>
   import AppBar from '../app_bar/AppBar.svelte';
+  import Breadcrumb from '../breadcrumb/Breadcrumb.svelte';
   import MenuItem from './MenuItem.svelte';
   import MenuHeader from './MenuHeader.svelte';
   import MenuList from './MenuList.svelte';
@@ -8,13 +9,12 @@
   import { logo } from '../../assets/logo.ts';
   import {
     APP_WIDTH,
+    APPBAR_POSITION,
     MENU_WIDTH,
     MARGIN_LEFT,
     MINI_MENU
   } from '../../main_store.ts';
-  import PageOne from '../pages/PageOne.svelte';
   export let open = true;
-  export let position = 'static';
 
   let hovering = false;
   let height;
@@ -22,17 +22,17 @@
   let marginTop;
   $: {
     classNames =
-      position === 'static'
+      $APPBAR_POSITION === 'static'
         ? 'px-3 lg:px-5 relative'
-        : position === 'sticky'
-        ? `fixed block inset-x-0 lg:ml-${$MARGIN_LEFT} bg-haiti px-2 lg:px-2 `
-        : `fixed block inset-x-0  lg:ml-${$MARGIN_LEFT}  lg:left-5 bg-haiti mx-3 lg:mx-5 mt-3 rounded-md`;
+        : $APPBAR_POSITION === 'sticky'
+        ? `fixed block inset-x-0 lg:ml-${$MARGIN_LEFT} shadow-blurtop bg-haiti px-2 lg:px-2 `
+        : `fixed block inset-x-0  lg:ml-${$MARGIN_LEFT}  shadow-blurtop  lg:left-5 bg-haiti  mx-3 lg:mx-5 mt-3 rounded-md`;
   }
   $: {
     marginTop =
-      position === 'static'
+      $APPBAR_POSITION === 'static'
         ? ''
-        : position === 'sticky'
+        : $APPBAR_POSITION === 'sticky'
         ? `mt-${height / 4 + 2}`
         : `mt-${height / 4 + 5}`;
   }
@@ -43,7 +43,7 @@
   transition-all duration-300 ease-in-out "
   on:mouseover="{e => {
     hovering = true;
-    if ($MINI_MENU) MENU_WIDTH.set('75');
+    if ($MINI_MENU) MENU_WIDTH.set('70');
   }}"
 >
   <slot name="menu-list">
@@ -73,18 +73,22 @@
   class=" relative flex flex-col main-content lg:ml-{$MARGIN_LEFT}
   transition-all duration-300 ease-in-out"
 >
-  <slot>
-    <div bind:clientHeight="{height}" class="{classNames}  transition-all duration-300 ease-in-out ">
-      <slot name="app-bar">
-        <AppBar on:toggle="{() => (open = !open)}" />
-      </slot>
-    </div>
+  <div
+    bind:clientHeight="{height}"
+    class="{classNames} transition-all duration-300 ease-in-out "
+  >
+    <slot name="app-bar">
+      <AppBar on:toggle="{() => (open = !open)}" />
+    </slot>
+  </div>
 
-    <div class="px-4 lg:px-6 {marginTop}  transition-all duration-300 ease-in-out ">
-      <slot name="content">
-        <PageOne on:positionChanged="{e => (position = e.detail)}" />
-      </slot>
-    </div>
-
-  </slot>
+  <div
+    class="px-4 lg:px-6 {marginTop} transition-all duration-300 ease-in-out "
+  >
+    <slot name="breadcrumb">
+      <Breadcrumb />
+    </slot>
+    <!-- Your contentgoes here -->
+    <slot /> 
+  </div>
 </div>
