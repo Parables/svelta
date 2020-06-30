@@ -2,13 +2,21 @@
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
-    border: 1px solid #5a67d8;
+    border: 2px solid #5a67d8;
     -webkit-text-fill-color: #5a67d8;
     -webkit-box-shadow: 0 0 0px 1000px white inset;
     box-shadow: 0 0 0px 1000px white inset;
     transition: background-color 5000s ease-in-out 0s;
   }
-
+ input:-webkit-autofill, 
+  input:-webkit-autofill:not(:hover),
+  input:-webkit-autofill:not(:focus) {
+    border:1px solid #718096;
+    -webkit-text-fill-color:#718096;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    box-shadow: 0 0 0px 1000px white inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
   input:focus {
     border-width: 2px;
   }
@@ -49,7 +57,7 @@
   }
 </script>
 
-<div class="relative inline-block {wrapperClass}">
+<div class="relative inline-flex {wrapperClass}">
 {#if leadingIcon}
   <span class="absolute z-20 text-green-400 select-none top-3 left-2" 
   on:click="{()=>{
@@ -81,10 +89,10 @@
       if (onFocus) onFocus();
     }}"
     type="text"
-    class="relative z-10 block py-6 {leadingIcon? 'pl-10':'px-4' } {trailingIcon? 'pr-10':'px-4' } m-0 w-auto leading-none transition
-    duration-300 ease-in-out bg-transparent border border-solid text-{inactiveColor}
+    class="relative z-10 block py-6 {leadingIcon? 'pl-10':'px-4' } {trailingIcon? 'pr-10':'px-4' } 
+    m-0 leading-none transition duration-300 ease-in-out bg-transparent border border-solid text-{inactiveColor}
     border-{inactiveColor} focus:text-{primaryColor} focus:border-{primaryColor}
-    rounded-md outline-none h-4 {inputClass}"
+    rounded-md outline-none h-4  {inputClass}"
   />
   <label
     for="{id}"
