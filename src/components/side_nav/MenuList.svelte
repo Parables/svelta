@@ -1,15 +1,8 @@
 <script>
   import { Menu } from './menu.ts';
   import { SVG } from '../../assets/svgs.ts';
-  import { MENU_WIDTH } from '../../main_store.ts';
-  import MenuItem from './MenuItem.svelte';
-  import { push, pop, replace } from 'svelte-spa-router';
-
-  function pushRoute( r, s = '') {
-    let path = `${r}${s}`
-    console.log(path)
-    push(path)
-  }
+  import { MENU_WIDTH, ACTIVE_PATH } from '../../main_store.ts';
+  import MenuItem from './MenuItem.svelte';  
 </script>
 
 <div class="block overflow-y-auto select-none menu-body text-cadetblue ">
@@ -26,15 +19,13 @@
       {#each g.routes as r, i}
         <MenuItem
           type="parent"
-          route="{r}"
-          on:click="{() => pushRoute( r.path)}"
+          route="{r}" path="{r.path}"
         >
           {#if $MENU_WIDTH === '70' && r.subRoutes}
             {#each r.subRoutes as s, j}
               <MenuItem
                 type="child"
-                route="{s}"
-                on:click="{() => pushRoute( r.path, s.path)}"
+                route="{s}" path="{`${r.path}${s.path}`}"
               />
             {/each}
           {/if}

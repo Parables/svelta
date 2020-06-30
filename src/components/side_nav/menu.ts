@@ -8,7 +8,7 @@ export interface MenuList {
 
 export interface Param {
 	param: string
-	name:string
+	name: string
 	component: any
 }
 
@@ -41,7 +41,7 @@ const MenuList: Array<MenuList> = [
 				path: "/books",
 				name: "Books", icon: "book",
 				title: "View, add and record stock of books",
-				params: [{ param: '/:id/:new?',name:'New Book,Edit Book,Book Info', component: PageOne }],
+				params: [{ param: '/:id/:new?', name: 'New Book,Edit Book,Book Info', component: PageOne }],
 				subRoutes: [
 					{
 						path: "/issueBooks",
@@ -64,12 +64,12 @@ const MenuList: Array<MenuList> = [
 				path: "/courses",
 				name: "Courses", icon: "atom",
 				title: "View, create, manage, assign and schedule courses",
-				params: [{ param: '/:id/:new?',name:'New Course,Edit Course,Course Info', component: PageOne }],
+				params: [{ param: '/:id/:new?', name: 'New Course,Edit Course,Course Info', component: PageOne }],
 			}, {
 				path: "/programmes",
 				name: "Programmes", icon: "certificate",
 				title: "View, create and manage programmes",
-				params: [{ param: '/:id/:new?',name:'New Programme,Edit Programme,Programme Info', component: PageOne }],
+				params: [{ param: '/:id/:new?', name: 'New Programme,Edit Programme,Programme Info', component: PageOne }],
 			}]
 	},
 	{
@@ -83,17 +83,23 @@ const MenuList: Array<MenuList> = [
 			path: "/students",
 			name: "Students", icon: "student",
 			title: "View and manage students data",
-			params: [{ param: '/:id/:new?',name:'Register Student,Edit Student,Student Profile', component: PageOne }]
+			params: [{ param: '/:id/:new?', name: 'Register Student,Edit Student,Student Profile', component: PageOne }]
 		}, {
 			path: "/teachers",
 			name: "Lecturers", icon: "teacher",
 			title: "View and manage teachers data",
-			params: [{ param: '/:id/:new?',name:'New Lecturer,Edit Lecturer,Lecturer Profile', component: PageOne }],
+			params: [{ param: '/:id/:new?', name: 'New Lecturer,Edit Lecturer,Lecturer Profile', component: PageOne }],
+			subRoutes: [
+				{
+					path: '/manage-schedule',
+					name: 'Manage Schedule',
+				}
+			]
 		}, {
 			path: "/staff",
 			name: "Staff", icon: "staff",
 			title: "View and manage staff data",
-			params: [{ param: '/:id/:new?',name:'New Lecturer,Edit Lecturer,Lecturer Profile', component: PageOne }],
+			params: [{ param: '/:id/:new?', name: 'New Lecturer,Edit Lecturer,Lecturer Profile', component: PageOne }],
 		}]
 	}, {
 		group: "SCHEDULE",
@@ -106,13 +112,13 @@ const MenuList: Array<MenuList> = [
 				path: "/events",
 				name: "Events", icon: "calendar",
 				title: "Create and management events",
-				params: [{ param: '/:id/:new?',name:'New Event,Edit Event,Event Details', component: PageOne }],
+				params: [{ param: '/:id/:new?', name: 'New Event,Edit Event,Event Details', component: PageOne }],
 			},
 			{
 				path: "/todos",
 				name: "Todos", icon: "check_square",
 				title: "Create reminders for important things to be done",
-				params: [{ param: '/:id/:new?',name:'New Todo,Edit Todo,View Todos', component: PageOne }]
+				params: [{ param: '/:id/:new?', name: 'New Todo,Edit Todo,View Todos', component: PageOne }]
 			}]
 	},
 

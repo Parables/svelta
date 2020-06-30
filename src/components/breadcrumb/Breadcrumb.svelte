@@ -7,30 +7,32 @@
   export let getCrumbs;
   export let paths = [];
 
-  function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
+  function titleCase(str) {
+    if(str!== '')
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map(function(word) {
+        return word.replace(word[0], word[0].toUpperCase());
+      })
+      .join(' ');
   }
-  
+
   function getPaths() {
     try {
-      return $CRUMBS[$location].split('/');
+      return $CRUMBS[$location].split('/').slice(1);
     } catch (e) {
       let a = $location.split('/');
       if ($location !== '/' && a.length > 2) {
-        let b = a
-          .slice(0, a.length - 2)
-          .join('/')
-          .toLowerCase();
+        let b = a.slice(0, a.length - 2).join('/').toLowerCase();
         let c = $CRUMBS[`${b}/params`].split('/');
         let d = c.slice(-1)[0].split(',');
         if ($location.search('false') === -1 && $location.search('true') === -1)
-          return (`${toTitleCase(b)}/${toTitleCase(d[2].toLowerCase())}`).split('/');
+          return `${b}/${d[2]}`.split('/');
         else if ($location.search('false') > -1)
-          return (`${toTitleCase(b)}/${toTitleCase(d[1].toLowerCase())}`).split('/');
+          return `${b}/${d[1]}`.split('/');
         else if ($location.search('true') > -1)
-          return (`${toTitleCase(b)}/${toTitleCase(d[0].toLowerCase())}`).split('/');
+          return `${b}/${d[0]}`.split('/').slice(1);
       }
     }
   }
@@ -89,7 +91,9 @@
             }}"
             class="text-sm text px-1 select-none {i < paths.length - 1 ? 'text-primary cursor-pointer' : 'text-cararra cursor-default'}"
           >
-            {p}
+          {#if p!== ''}
+            {titleCase(p)}
+            {/if}
           </span>
         </slot>
       {/each}

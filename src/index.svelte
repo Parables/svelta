@@ -1,5 +1,5 @@
 <script>
-  import { APP_WIDTH, CRUMBS } from './main_store.ts';
+  import { APP_WIDTH, CRUMBS, ACTIVE_PATH } from './main_store.ts';
   import SideNav from './components/side_nav/SideNav.svelte';
   import Router, {location, push, pop,replace} from 'svelte-spa-router';
   import { getRoutes } from './routes.ts';
@@ -14,6 +14,7 @@ getRoutes()
   // Handles the "routeLoaded" event dispatched by the router after a route has been successfully loaded
   function routeLoaded(event) {
     console.info('Caught event routeLoaded', event.detail);
+     ACTIVE_PATH.set(event.detail.location)
   }
   // Handles event bubbling up from nested routes
   function routeEvent(event) {

@@ -1,37 +1,45 @@
 <script>
   import { SVG, icon_name } from '../../assets/svgs';
-  import { MENU_WIDTH } from '../../main_store';
+  import { MENU_WIDTH, ACTIVE_PATH } from '../../main_store';
+  import {location, push} from 'svelte-spa-router'
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
-  export let route;
+  export let route;  export let path;
   export let type; //'parent' | 'child'
-  export let location = '';
-  let color;
-  let full;
+  let full; 
   let expand;
   let hovering;
-  $: {
-    if (location.toLowerCase().includes(route.name.toLowerCase())) {
-      if (type === 'parent') color = 'bg-comet ';
-      else color = 'bg-primary';
-    } else color = 'bg-transparent hover:bg-comet';
-  }
-  $: {
+   $: {
     full = $MENU_WIDTH === '70';
   }
+  let active=type==='parent' && route.subRoutes?'bg-comet':'bg-primary'
+  let inactive = 'bg-transparent hover:bg-comet'
+  let color = inactive
+  let parentColor = 'bg-comet'
+$:{
+  if(route.path==='/'){
+    color= $location.length === 1?  active: inactive
+  } else {
+    color =$location=== path ? active:inactive
+  }
+              
+ 
+}
 </script>
+
+
 
 <div title="{route.title}"
   class="{type === 'parent' ? 'menu-item' : 'menu-sub-item'} block select-none"
 >
   <span
-    class="flex items-center justify-between menu p-2 mb-2 mx-4 cursor-pointer
-    outline-none rounded-md select-none {color}"
+    class="flex items-center justify-between p-2 mx-4 mb-2 rounded-md outline-none cursor-pointer select-none menu {route.subRoutes && $location.includes(path)? parentColor: inactive} {color} "
     on:mousemove="{() => (hovering = true)}"
     on:mouseout="{() => (hovering = false)}"
     on:click="{() => {
-      expand = !expand;
-      dispatch('click');
+      push(path)
+   expand = !expand;
+      dispatch('click', route.route);
     }}"
   >
     <span
