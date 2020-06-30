@@ -20,7 +20,7 @@
 
   function getPaths() {
     try {
-      return $CRUMBS[$location].split('/').slice(1);
+      return $CRUMBS[$location].split('/');
     } catch (e) {
       let a = $location.split('/');
       if ($location !== '/' && a.length > 2) {
@@ -32,7 +32,7 @@
         else if ($location.search('false') > -1)
           return `${b}/${d[1]}`.split('/');
         else if ($location.search('true') > -1)
-          return `${b}/${d[0]}`.split('/').slice(1);
+          return `${b}/${d[0]}`.split('/');
       }
     }
   }
