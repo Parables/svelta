@@ -36,7 +36,7 @@
   export let onBlur = null;
   export let leadingIcon = false;
   export let trailingIcon = false ;
-  export let primaryColor = 'purple-500';
+  export let primaryColor = 'primary';
   export let labelBg = 'bg-white';
   export let labelColor = `text-${primaryColor}`;
   export let inactiveColor = 'gray-500';
