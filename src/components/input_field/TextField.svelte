@@ -1,6 +1,5 @@
 <style>
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
+/*   input:-webkit-autofill,
   input:-webkit-autofill:focus {
     border: 2px solid #5a67d8;
     -webkit-text-fill-color: #5a67d8;
@@ -8,15 +7,14 @@
     box-shadow: 0 0 0px 1000px white inset;
     transition: background-color 5000s ease-in-out 0s;
   }
- input:-webkit-autofill, 
-  input:-webkit-autofill:not(:hover),
+  input:-webkit-autofill,
   input:-webkit-autofill:not(:focus) {
-    border:1px solid #718096;
-    -webkit-text-fill-color:#718096;
+    border: 1px solid #718096;
+    -webkit-text-fill-color: #718096;
     -webkit-box-shadow: 0 0 0px 1000px white inset;
     box-shadow: 0 0 0px 1000px white inset;
     transition: background-color 5000s ease-in-out 0s;
-  }
+  } */
   input:focus {
     border-width: 2px;
   }
@@ -27,46 +25,42 @@
   const dispatch = createEventDispatcher();
   let active = false;
   let float = false;
-
   // default classes
   export let id = '';
   export let name = '';
   export let label = '';
   export let value = '';
-
-  export let wrapperClass = '';
-  export let labelClass = '';
-  export let inputClass = '';
-  export let error = '';
+ export let colors=''
+ export let width =''
+ export let error = '';
+  export let leadingIcon = false;
+  export let trailingIcon = false;
   export let validators = [];
   export let onChange = null;
   export let onFocus = null;
   export let onBlur = null;
-  export let leadingIcon = false;
-  export let trailingIcon = false ;
-  export let primaryColor = 'primary';
-  export let labelBg = 'bg-white';
-  export let labelColor = `text-${primaryColor}`;
-  export let inactiveColor = 'gray-500';
-
   $: {
     /*  run validators*/
     validators.forEach(v => {
       console.log(v);
     });
   }
+  
 </script>
 
-<div class="relative inline-flex {wrapperClass}">
-{#if leadingIcon}
-  <span class="absolute z-20 text-green-400 select-none top-3 left-2" 
-  on:click="{()=>{
-  dispatch('iconClicked', {icon: 'first'});
-  }}">
-    <slot name="leadingIcon">
-      <!--Add your icon here --> 
-    </slot>
-  </span>
+<div class=" {width}">
+<div class="relative">
+  {#if leadingIcon}
+    <span
+      class="absolute z-20 select-none top-3 left-2 {colors}"
+      on:click="{() => {
+        dispatch('iconClicked', { icon: 'first' });
+      }}"
+    >
+      <slot name="leadingIcon">
+        <!--Add your icon here -->
+      </slot>
+    </span>
   {/if}
   <input
     {id}
@@ -89,37 +83,35 @@
       if (onFocus) onFocus();
     }}"
     type="text"
-    class="relative z-10 block py-6 {leadingIcon? 'pl-10':'px-4' } {trailingIcon? 'pr-10':'px-4' } 
-    m-0 leading-none transition duration-300 ease-in-out bg-transparent border border-solid text-{inactiveColor}
-    border-{inactiveColor} focus:text-{primaryColor} focus:border-{primaryColor}
-    rounded-md outline-none h-4  {inputClass}"
+    class="relative z-10 block py-6 w-full {leadingIcon ? 'pl-10' : 'px-4'}
+    {trailingIcon ? 'pr-10' : 'px-4'} m-0 leading-none transition duration-300
+    ease-in-out bg-transparent border border-solid rounded-md outline-none h-4 {colors}"
   />
   <label
-    for="{id}"
-    class="select-none z-20 text-gray-600 leading-none align-baseline absolute
-    top-2 {leadingIcon? 'left-8':'left-2' } inline-block w-auto m-0 p-2 origin-center transition
-    duration-300 {float ? `transform translate-x-0 -translate-y-4 py-0 scale-90 z-30 top-2 ` : ''}
-    {active ? labelColor : 'text-gray-400 '}
-    {float ? labelBg : ''}
-    {labelClass}
-    "
+    for="{id}" 
+    class=" select-none z-20 leading-none align-baseline absolute top-2 {leadingIcon ? 'left-8' : 'left-2'} inline-block w-auto m-0 p-2
+    origin-center transition duration-300
+    {float ? `transform translate-x-0 -translate-y-4 py-0 scale-90 z-30 top-2 text-primary ` : ''} {colors}"
   >
     {label}
   </label>
   {#if trailingIcon}
-  <span class="absolute z-20 select-none top-3 right-2 "
-   on:click="{()=>{
-  dispatch('iconClicked', {icon: 'last'});
-  }}">
-    <slot name="trailingIcon">
-          <!--Add your icon here --> 
+    <span
+      class="absolute z-20 select-none top-3 right-2  {colors}"
+      on:click="{() => {
+        dispatch('iconClicked', { icon: 'last' });
+      }}"
+    >
+      <slot name="trailingIcon">
+        <!--Add your icon here -->
 
-    </slot>
-  </span>
+      </slot>
+    </span>
   {/if}
   {#if error !== ''}
     <div class="block">
       <p class="px-3 py-1 text-xs text-red-600 select-none ">{error}</p>
     </div>
   {/if}
+</div>
 </div>
