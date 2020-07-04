@@ -59,7 +59,7 @@
   <div class="flex py-3 align-middle">
     <slot name="current-route">
       <h2
-        class="inline-flex p-0 px-2 mr-2 text-xl font-normal leading-6 border border-t-0 border-b-0 border-l-0 border-r text-cararra border-cararra "
+        class="inline-flex p-0 px-2 mr-2 text-xl font-normal leading-6 border border-t-0 border-b-0 border-l-0 border-r select-none text-cararra border-cararra "
       >
         {paths[paths.length - 1]}
       </h2>

@@ -1,5 +1,6 @@
 import { icon_name } from "src/assets/svgs"
 import PageOne from "../pages/PageOne.svelte";
+import PageTwo from '../pages/PageTwo.svelte'
 
 export interface MenuList {
 	group: string
@@ -41,7 +42,7 @@ const MenuList: Array<MenuList> = [
 				path: "/books",
 				name: "Books", icon: "book",
 				title: "View, add and record stock of books",
-				params: [{ param: '/:id/:new?', name: 'New Book,Edit Book,Book Info', component: PageOne }],
+				params: [{ param: '/:id/:new?', name: 'New Book,Edit Book,Book Info', component: PageTwo }],
 				subRoutes: [
 					{
 						path: "/issueBooks",

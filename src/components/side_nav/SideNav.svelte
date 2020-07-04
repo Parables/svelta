@@ -33,8 +33,8 @@
       $APPBAR_POSITION === 'static'
         ? ''
         : $APPBAR_POSITION === 'sticky'
-        ? `mt-${height / 4 + 2}`
-        : `mt-${height / 4 + 5}`;
+        ? `mt-${height / 4}`
+        : `mt-${height / 4+3}`;
   }
 </script>
 
@@ -75,7 +75,7 @@
 >
   <div
     bind:clientHeight="{height}"
-    class="{classNames} transition-all duration-300 ease-in-out "
+    class="{classNames} transition-all duration-300 ease-in-out z-10 "
   >
     <slot name="app-bar">
       <AppBar on:toggle="{() => (open = !open)}" />
@@ -83,7 +83,7 @@
   </div>
 
   <div
-    class="px-4 lg:px-6 {marginTop} transition-all duration-300 ease-in-out "
+    class="z-0 px-4 {marginTop} transition-all duration-300 ease-in-out lg:px-6 "
   >
     <slot name="breadcrumb">
       <Breadcrumb />
