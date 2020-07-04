@@ -1,91 +1,152 @@
-<style>
-
-</style>
-
-<script>
+<script lang="typescript">
+  import { SVG } from '../../assets/svgs';
+  import { createEventDispatcher, onMount } from 'svelte';
+  const dispatch = createEventDispatcher();
   let active = false;
-  let defaultLabelStyle = `
-top: 0.75em;
-left: 0.75em;
-transition: transform 0.25s, opacity 0.25s, padding 0.25s ease-in-out;
-transform-origin: 0 0;`;
-
-  let floatingState = `
-z-index: 2500;
-transform: translate(0, -2em) scale(0.9);`;
-
-  let defaultLabelClass =
-    'bg-white text-gray-600 select-none   leading-none  absolute block p-6  m-0';
-  let normalLabelClass = ' z-1500 bg-white ';
-  let floatingLabelClass = 'z-2500  px-1 pt-3 pb-0 text-sm';
-
-  let defaultInputClass = ` m-0 max-h-64 p-6  lg transition duration-300 ease-in-out overflow-visible block z-2000 leading-none relative outline-none bg-white border border-solid rounded-md  `;
-
+  let float = false;
+  // default classes
   export let id = '';
   export let name = '';
-  export let placeholder = '';
-  const tempHolder = placeholder;
-  export let color = 'primary';
-  export let inactiveColor = 'gray-400';
   export let label = '';
   export let value = '';
-  export let min = 0;
-  export let max = 10000;
-  export let step = 1;
-  export let wrapperClass = '';
-  export let labelClass = '';
-  export let inputClass = '';
-  export let error = '';
+  export let hint = '';
+  export let min;
+  export let max;
+  export let step;
+  export let colors = ['haiti', 'primary', 'cadetblue']; //bg, focus, blur
+  export let width = 'w-full';
+  export let height = 'h-10';
+  export let variant = 'outlined'; //|"standard" | "normal"
+  export let startIcon = false;
+  export let endIcon = false;
   export let validators = [];
-  export let callback = null;
-  $: {
-    if (!active) placeholder = label;
-    else placeholder = tempHolder;
-  }
-
+  export let onChange = null;
+  export let onFocus = null;
+  export let onBlur = null;
+  export let onStartIconClicked = null;
+  export let onEndIconClicked = null;
+  // use these if you want to take control
+  export const wrapperClass = 'mb-5';
+  export const inputClass = ``;
+  export const labelClass = '';
+  export const hintClass = 'text-red-600';
+  export const iconsClass = '';
+  export const leadingIconClass = active
+    ? ` text-${colors[1]} `
+    : ` text-${colors[2]} `;
+  export const trailingIconClass = active
+    ? ` text-${colors[1]} `
+    : ` text-${colors[2]} `;
   $: {
     /*  run validators*/
     validators.forEach(v => {
       console.log(v);
     });
   }
+
+  let h, top;
+  $: {
+    top = Math.trunc(h / 8) - 2;
+    console.log('height', h, top);
+  }
+  let variantStyle;
+  $: {
+    variantStyle =
+      variant === 'outlined'
+        ? `border-solid rounded ${active ? ' border-2 ' : ' border '}`
+        : variant === 'standard'
+        ? `border-t-0 border-l-0 border-r-0 border-b bg-${colors[0]} 
+           ${active ? ' border-b-2 ' : ' border-b '} ${h < 49 ? ' pt-2 ' : ''}`
+        : `border-solid rounded bg-${colors[0]}  ${
+            active ? ' border-2 ' : ' border '
+          }`;
+  }
 </script>
 
-<div class="relative my-1 {wrapperClass}">
-  <input
-    {id}
-    {name}
-    {min}
-    {max}
-    {step}
-    {placeholder}
-    bind:value
-    on:blur="{() => (active = value !== '' || value > min ? false : true)}"
-    on:input="{() => {
-      if (callback !== null) callback();
-    }}"
-    class="
-    {defaultInputClass} text-{inactiveColor} border-{inactiveColor} focus:text-{color}
-    focus:border-{color}
-    {inputClass}
-    "
-    on:focus="{() => (active = true)}"
-    type="number"
-  />
-  <label
-    for="field-1"
-    class="{defaultLabelClass}
-    {active ? floatingLabelClass : normalLabelClass}
-    {labelClass}
-    "
-    style="{defaultLabelStyle}
-    {active ? floatingState : normalLabelClass}"
+<div class=" {width} {wrapperClass}">
+  <div
+    bind:clientHeight="{h}"
+    class="{variantStyle}
+    {active ? `text-${colors[1]} border-${colors[1]}` : `text-${colors[2]} border-${colors[2]}`}"
   >
-    {active ? label : placeholder}
-  </label>
-  {#if error !== ''}
-    <div class="block">
-      <p class="py-1 text-xs text-center text-red-600 ">{error}</p>
+    {#if startIcon}
+      <span
+        class="absolute select-none top-{top} left-1 {active ? `text-${colors[1]}` : `text-${colors[2]}`}
+        {iconsClass}
+        {leadingIconClass}"
+        on:click="{() => {
+          dispatch('iconClicked', { icon: 'first' });
+          if (onStartIconClicked) onStartIconClicked();
+        }}"
+      >
+        <slot name="startIcon">
+          <!--Add your icon here -->
+        </slot>
+      </span>
+    {/if}
+    {#if variant !== 'normal'}
+      <label
+        for="{id}"
+        class=" select-none leading-none absolute top-{top} text-sm {startIcon ? 'left-8' : 'left-1'}
+        inline-block w-auto m-0 px-2 py-0 origin-center transition duration-300
+        bg-{colors[0]} bg-transparent {float ? `transform translate-x-0 -translate-y-${variant === 'outlined' ? top + 2 : top - 1} scale-90 ` : ''}
+        {active ? `text-${colors[1]}` : `text-${colors[2]}`}
+        {labelClass}"
+      >
+        {label}
+      </label>
+    {/if}
+    <input
+      {id}
+      {name}
+      {min}
+      {max}
+      {step}
+      bind:value
+      type="number"
+      autocomplete="off"
+      placeholder="{variant === 'normal' ? label : ''}"
+      on:blur="{() => {
+        active = false;
+        float = value !== '';
+        dispatch('blur');
+        if (onBlur) onBlur();
+      }}"
+      on:input="{() => {
+        dispatch('change');
+        if (onChange) onChange();
+      }}"
+      on:focus="{() => {
+        active = true;
+        float = true;
+        dispatch('focus');
+        if (onFocus) onFocus();
+      }}"
+      class=" block w-full {height}
+      {startIcon ? 'pl-10' : 'px-4'}
+      {endIcon ? 'pr-10' : 'px-4'} m-0 leading-none transition duration-300
+      ease-in-out bg-transparent outline-none border-none {inputClass}"
+    />
+
+    {#if endIcon}
+      <span
+        class="absolute select-none top-{top} right-2 {active ? `text-${colors[1]}` : `text-${colors[2]}`}
+        {iconsClass}
+        {trailingIconClass}"
+        on:click="{() => {
+          dispatch('iconClicked', { icon: 'last' });
+          if (onEndIconClicked) onEndIconClicked();
+        }}"
+      >
+        <slot name="endIcon">
+          <!--Add your icon here -->
+        </slot>
+      </span>
+    {/if}
+  </div>
+  {#if hint !== ''}
+    <div class="block mx-3 py-1 text-xs select-none truncate {hintClass}">
+      <p>{hint}</p>
     </div>
   {/if}
 </div>

@@ -2,46 +2,27 @@
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
   import { APPBAR_POSITION } from '../../main_store';
-  import TextField from '../input_field/TextField.svelte';
-  import Chip from '../chip_input/Chip.svelte';
   import FormBuilder from '../form_builder/FormBuilder.svelte';
-  import { FormOption, Section } from '../form_builder/form_options';
+  import { options } from './FormOne';
   let position;
   $: {
     APPBAR_POSITION.set(position);
   }
-  let sections: Section[] = [
-    {
-      title: 'Personal Details',
-      fields: [
-        {
-          id: 'surname',
-          name: 'surname',
-          label: 'Surname',
-          type: 'text',
-          colors:
-            'bg-white text-gray-500 focus:text-primary border-gray-500 focus:border-primary',
-          width: 'w-60p'
-        },
-        {
-          id: 'firstname',
-          name: 'firstname',
-          label: 'First name',
-          type: 'text',
-          colors:
-            'bg-white text-gray-500 focus:text-primary border-gray-500 focus:border-primary',
-          width: 'w-35p'
-        }
-      ]
-    }
-  ];
-  let options: FormOption = { id: 'Form1', sections: sections };
 </script>
 
 <slot>
   <!-- Some content start -->
-  <div class="w-full my-2 text-black bg-white rounded-md h-205">
+  <div class="w-full px-6 py-4 rounded text-cadetblue bg-haiti ">
     <FormBuilder {options} />
   </div>
   <!-- Some content end -->
+  <div class="w-full my-2 text-black bg-white rounded-md h-205">
+    I'm a big useles card just taking up space
+    <input type="radio" value="static" bind:group="{position}" id="static" />
+    <label for="static">static</label>
+    <input type="radio" value="sticky" bind:group="{position}" id="sticky" />
+    <label for="sticky">sticky</label>
+    <input type="radio" value="float" bind:group="{position}" id="float" />
+    <label for="float">float</label>
+  </div>
 </slot>

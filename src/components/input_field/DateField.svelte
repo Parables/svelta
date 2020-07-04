@@ -101,7 +101,7 @@
       {min}
       {max}
       bind:value
-      type="text"
+      type="date"
       autocomplete="off"
       placeholder="{variant === 'normal' ? label : ''}"
       on:blur="{() => {
