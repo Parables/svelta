@@ -8,12 +8,16 @@
   $: {
     APPBAR_POSITION.set(position);
   }
+  let data
+  $:{
+console.log('form data', data)
+  }
 </script>
 
 <slot>
   <!-- Some content start -->
   <div class="w-full px-6 py-4 rounded text-cadetblue bg-haiti ">
-    <FormBuilder {options} />
+    <FormBuilder {options} bind:data />
   </div>
   <!-- Some content end -->
   <div class="w-full my-2 text-black bg-white rounded-md h-205">

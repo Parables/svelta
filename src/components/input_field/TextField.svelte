@@ -10,8 +10,10 @@
   export let label = '';
   export let value = '';
   export let hint = '';
-  export let min;
-  export let max;
+  export let type = 'text';
+  export let min=0;
+  export let max=10000000;
+  export let step=1;
   export let colors = ['haiti', 'primary', 'cadetblue']; //bg, focus, blur
   export let width = 'w-full';
   export let height = 'h-10';
@@ -19,7 +21,7 @@
   export let startIcon = false;
   export let endIcon = false;
   export let validators = [];
-  export let onChange = null;
+  export let onInput = null;
   export let onFocus = null;
   export let onBlur = null;
   export let onStartIconClicked = null;
@@ -100,8 +102,8 @@
       {name}
       {min}
       {max}
-      bind:value
-      type="text"
+      {step}
+      {type}
       autocomplete="off"
       placeholder="{variant === 'normal' ? label : ''}"
       on:blur="{() => {
@@ -110,9 +112,10 @@
         dispatch('blur');
         if (onBlur) onBlur();
       }}"
-      on:input="{() => {
-        dispatch('change');
-        if (onChange) onChange();
+      on:input="{(e) => {
+        value = e.target.value
+        dispatch('input');
+        if (onInput) onInput();
       }}"
       on:focus="{() => {
         active = true;

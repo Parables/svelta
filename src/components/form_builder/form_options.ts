@@ -16,12 +16,14 @@ export interface Field {
     min?: number
     max?: number
     step?: number
+    items: Items[]
+    multiSelect?: boolean
     variant?: "outlined" | "standard" | "normal"
     validate?: string[]
     leadingIcon?: boolean
     trailingIcon?: boolean
     validators?: any[]
-    onChange?: null
+    onInput?: null
     onFocus?: null
     onBlur?: null
     wrapperClass?: string
@@ -33,16 +35,6 @@ export interface Field {
     trailingIconClass?: string
 }
 
-export interface TextField extends Field {
-    type: "text" | "email" | "password" | "tel" | "date"
-}
-
-export interface NumberField extends Field {
-    type: "number"
-    min?: 0
-    max?: number
-    step?: number
-}
 
 interface Items {
     id: string
@@ -50,15 +42,6 @@ interface Items {
     label?: string
 }
 
-export interface SelectField extends Field {
-    type: | "radio" | "checkbox" | "chip" | "chipinput" | "select"
-    items: Items[]
-    multiSelect?: boolean
-    min?: number
-    max?: number
-}
-
-export type Fields = TextField | NumberField | SelectField
 export interface Row{
     class?: string
     fields: Field[]
