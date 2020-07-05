@@ -8,14 +8,14 @@
   export let paths = [];
 
   function titleCase(str) {
-    if(str!== '')
-    return str
-      .toLowerCase()
-      .split(' ')
-      .map(function(word) {
-        return word.replace(word[0], word[0].toUpperCase());
-      })
-      .join(' ');
+    if (str !== '')
+      return str
+        .toLowerCase()
+        .split(' ')
+        .map(function(word) {
+          return word.replace(word[0], word[0].toUpperCase());
+        })
+        .join(' ');
   }
 
   function getPaths() {
@@ -24,7 +24,10 @@
     } catch (e) {
       let a = $location.split('/');
       if ($location !== '/' && a.length > 2) {
-        let b = a.slice(0, a.length - 2).join('/').toLowerCase();
+        let b = a
+          .slice(0, a.length - 2)
+          .join('/')
+          .toLowerCase();
         let c = $CRUMBS[`${b}/params`].split('/');
         let d = c.slice(-1)[0].split(',');
         if ($location.search('false') === -1 && $location.search('true') === -1)
@@ -59,12 +62,12 @@
   <div class="flex py-3 align-middle">
     <slot name="current-route">
       <h2
-        class="inline-flex p-0 px-2 mr-2 text-xl font-normal leading-6 border border-t-0 border-b-0 border-l-0 border-r select-none text-cararra border-cararra "
+        class="inline-flex p-0 px-2 mr-2 text-xl font-normal leading-6 border border-t-0 border-b-0 border-l-0 border-r-0 select-none lg:border-r text-cararra border-cararra "
       >
         {paths[paths.length - 1]}
       </h2>
     </slot>
-    <div transition:fade class="flex items-center justify-start">
+    <div transition:fade class="items-center justify-start hidden md:flex">
       {#each paths as p, i}
         {#if i === 0}
           <slot name="home-icon">
@@ -91,9 +94,7 @@
             }}"
             class="text-sm text px-1 select-none {i < paths.length - 1 ? 'text-primary cursor-pointer' : 'text-cararra cursor-default'}"
           >
-          {#if p!== ''}
-            {titleCase(p)}
-            {/if}
+            {#if p !== ''}{titleCase(p)}{/if}
           </span>
         </slot>
       {/each}

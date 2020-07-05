@@ -8,16 +8,18 @@
   export let id = '';
   export let name = '';
   export let label = '';
+  export let placeholder = '';
   export let value = '';
   export let hint = '';
   export let type = 'text';
   export let min=0;
   export let max=10000000;
   export let step=1;
-  export let colors = ['haiti', 'primary', 'cadetblue']; //bg, focus, blur
+  export let readonly = false
+  export let colors = ['comet', 'primary', 'cadetblue']; //bg, focus, blur
   export let width = 'w-full';
-  export let height = 'h-10';
-  export let variant = 'outlined'; //|"standard" | "normal"
+  export let height = 'h-8';
+  export let variant = 'normal'; //|"standard" | "outlined"
   export let startIcon = false;
   export let endIcon = false;
   export let validators = [];
@@ -65,10 +67,13 @@
 </script>
 
 <div class=" {width} {wrapperClass}">
+  {#if variant==='normal'}
+  <label for="{id}" class="pl-1 text-xs select-none text-{active? colors[1] :colors[2]}">{label}</label>
+{/if}
   <div
     bind:clientHeight="{h}"
     class="{variantStyle}
-    {active ? `text-${colors[1]} border-${colors[1]}` : `text-${colors[2]} border-${colors[2]}`}"
+    {active ? `text-${colors[1]} border-${colors[1]}` : variant==='normal'? `text-${colors[2]} border-transparent`: `text-${colors[2]} border-${colors[2]}`}"
   >
     {#if startIcon}
       <span
@@ -86,7 +91,7 @@
       </span>
     {/if}
     {#if variant !== 'normal'}
-      <label
+    <label
         for="{id}"
         class=" select-none leading-none absolute top-{top} text-sm {startIcon ? 'left-8' : 'left-1'}
         inline-block w-auto m-0 px-2 py-0 origin-center transition duration-300
@@ -104,8 +109,9 @@
       {max}
       {step}
       {type}
+      {readonly}
       autocomplete="off"
-      placeholder="{variant === 'normal' ? label : ''}"
+      placeholder="{variant === 'normal' ? placeholder : ''}"
       on:blur="{() => {
         active = false;
         float = value !== '';

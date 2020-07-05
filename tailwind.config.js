@@ -18,7 +18,7 @@ module.exports = {
           warning:'#FF9F43',
           cadetblue: '#C2C6DC',
           haiti:'#10163A',
-          comet: '#252C49',
+          comet: '#262C49',
           cometdeep: '#222744',
           cararra: '#DDE8FD'
         },
@@ -26,8 +26,8 @@ module.exports = {
         width: 'width',
         display: 'display'
         },   boxShadow: {
-          blurtop:'0px -10px 50px 5px #10163A',
-          blurdown:'',
+          haiti:'0px -10px 50px 5px #10163A',
+          primary:'0px 0px 5px 2px #7367F0',
           blurright:'',
           blurleft:'0 35px 60px -15px rgba(0, 0, 0, .3)',
         }

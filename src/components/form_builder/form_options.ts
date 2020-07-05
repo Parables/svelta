@@ -16,8 +16,9 @@ export interface Field {
     min?: number
     max?: number
     step?: number
-    items: Items[]
+    items?: Items[]
     multiSelect?: boolean
+    readonly?: boolean
     variant?: "outlined" | "standard" | "normal"
     validate?: string[]
     leadingIcon?: boolean
@@ -56,6 +57,7 @@ export interface Section {
 export interface FormOption {
     id: string
     sections: Section[]
+    class?: string
     store?: any
     validateSchema?: any
 }

@@ -8,6 +8,7 @@ let sections: Section[] = [
 
   {
     title: 'Academic Information',
+    // class: 'inline-block w-40p',
     rows: [
       {
         fields: [
@@ -69,6 +70,7 @@ let sections: Section[] = [
   },
   {
     title: 'Personal Information',
+    // class: 'inline-block w-40p',
     rows: [
       {
         fields: [
@@ -113,6 +115,7 @@ let sections: Section[] = [
   },
   {
     title: 'Contact',
+    // class: 'inline-block w-40p',
     rows: [
       {
         fields: [
@@ -142,7 +145,8 @@ let sections: Section[] = [
 
 let formOptions: FormOption = {
   id: 'Form1',
-  sections: sections
+  sections: sections,
+  // class : " flex justify-betwen w-full items-start"
 };
 
 export const options = formOptions

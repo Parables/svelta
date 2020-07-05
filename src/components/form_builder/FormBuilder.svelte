@@ -11,7 +11,7 @@ export let data = {}
     <div class="section {s.class}">
       <slot name="section-title">
         {#if s.title}
-          <div class="py-2 text-sm font-normal text-cadetblue">
+          <div class="pt-4 pb-3 text-sm font-normal text-cadetblue">
             <slot>{s.title}</slot>
           </div>
         {/if}

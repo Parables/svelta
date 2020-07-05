@@ -25,8 +25,8 @@
       $APPBAR_POSITION === 'static'
         ? 'px-3 lg:px-5 relative'
         : $APPBAR_POSITION === 'sticky'
-        ? `fixed block inset-x-0 lg:ml-${$MARGIN_LEFT} shadow-blurtop bg-haiti px-2 lg:px-2 `
-        : `fixed block inset-x-0  lg:ml-${$MARGIN_LEFT}  shadow-blurtop  lg:left-5 bg-haiti  mx-3 lg:mx-5 mt-3 rounded-md`;
+        ? `fixed block inset-x-0 lg:ml-${$MARGIN_LEFT} shadow-haiti bg-haiti px-2 lg:px-2 `
+        : `fixed block inset-x-0  lg:ml-${$MARGIN_LEFT}  shadow-haiti  lg:left-5 bg-haiti  mx-3 lg:mx-5 mt-3 rounded-md`;
   }
   $: {
     marginTop =
