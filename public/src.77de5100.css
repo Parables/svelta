@@ -1,0 +1,7 @@
+input.svelte-23k65m:-webkit-autofill,input.svelte-23k65m:-webkit-autofill:hover,input.svelte-23k65m:-webkit-autofill:focus{
+  border:1px solid #5a67d8;
+  -webkit-text-fill-color:#5a67d8;
+  -webkit-box-shadow:0 0 0px 1000px white inset;
+  box-shadow:0 0 0px 1000px white inset;
+  transition:background-color 5000s ease-in-out 0s
+}

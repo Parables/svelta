@@ -27,8 +27,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "rm -rf dist && rm -rf .cache && parcel serve src/index.html",
-    "build": "rm -rf dist && rm -rf .cache && parcel build src/index.html",
+    "start": "rm -rf dist && rm -rf .cache && parcel serve -d public src/index.html",
+    "build": "rm -rf dist && rm -rf .cache && parcel build -d build src/index.html",
     "generate-custom-types": "npx tailwindcss-classnames"
   },
   "repository": {
