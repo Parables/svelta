@@ -5,17 +5,19 @@ pass in your own TailwndCSS classes and get custom unique components.
 Style it your way.
 
 ### Demo
-
 Coming soon...
 
+### Screenshot
+![Svelta Preview](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+
 ### Inspiration
-Svelta was greatly inspired by Vuexy https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/landing/ 
+Svelta was greatly inspired by ![Vuexy](https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/landing/) 
 I really love their design(esp. the colors used) and it a great recommendation for every. Seeing that they had support for Vue and React challenged me to make a Svelta. I wanted to try my hands on something real and professional with Svelte and Tailwind CSS hence Svelta was born. Svelta = Svelte + Tailwind 
 
 ### Reinventing the wheel?
 Why make another UI component kit when we already got Smelte and SMUI? What's so special about Svelte?
 
-I must say that I really love (Smelte)[] and Svelte Material UI but I really want to take full control and have the ability to mess up the components my way to let it flow with my theme. Infact, Svelta was inspired by them.
+I must say that I really love ![Smelte](https://smeltejs.com/) and ![Svelte Material UI](https://sveltematerialui.com) but I really want to take full control and have the ability to mess up the components my way to let it flow with my theme. Infact, Svelta was inspired by them.
 
 ### How to use it?
 **Option 1: (Recommended)**
@@ -39,16 +41,16 @@ Sorry, I don't do caffaine, neither does PayPal work in my country(Ghana) but if
 - Form Builder(Make dynamic forms with JS or TS)
 - Form components    
     
-    [x] TextField
-    [] Toggle Switch
-    [] Chips/Tags
-    [] Chip/Tags input
-    [] Checkbox
-    [] Radio button
-    [] Autocomplete/Type ahead input
-    [] SelectField
-    [] File input
-    [] Want more? Create an issue.
+   - [x] TextField
+   - [ ] Toggle Switch
+   - [ ] Chips/Tags
+   - [ ] Chip/Tags input
+   - [ ] Checkbox
+   - [ ] Radio button
+   - [ ] Autocomplete/Type ahead input
+   - [ ] SelectField
+   - [ ] File input
+   - [ ] Want more? Create an issue.
 
 ### Contribute?
 PR's are welcomed. I love contributing to open source project cause i believe in a free world. The most important things in life are free. Want to invite me to your project, here is my email: parables95@gmail.com 
