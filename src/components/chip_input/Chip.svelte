@@ -1,19 +1,30 @@
 <script>
   import { SVG } from '../../assets/svgs.ts';
+  import Avartar from '../avartar/Avartar.svelte';
   export let id;
-  export let classNames;
+  export let classNames = '';
+  export let dismissable = true;
 </script>
 
-<span
+<div
   on:click
   {id}
-  class="inline-flex items-center justify-between py-1 pl-2 rounded-md
-  cursor-pointer text-white bg-primary text-sm font-medium truncate select-none {classNames}"
+  class="inline-flex justify-evenly items-center rounded cursor-pointer text-cadetblue bg-haiti
+  text-sm truncate select-none {classNames}"
 >
-  <span {id} class="">
+  <slot name="start">
+    <!-- <Avartar size='w-6 h-6' iconClass='w-10 h-10' /> -->
+  </slot>
+
+  <span {id} class="pl-2">
     <slot />
   </span>
-  <span>
-    {@html SVG('close', 'w-4 h-4 m-0 ')}
-  </span>
-</span>
+
+  {#if dismissable}
+    <slot name="end">
+      <span class="p-0 m-0">
+        {@html SVG('close', 'w-4 h-4')}
+      </span>
+    </slot>
+  {/if}
+</div>

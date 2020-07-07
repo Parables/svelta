@@ -3,14 +3,19 @@
   let dispatch = createEventDispatcher();
   import { APPBAR_POSITION } from '../../main_store';
   import FormBuilder from '../form_builder/FormBuilder.svelte';
+  import ToggleSwitch from '../toggle_switch/ToggleSwitch.svelte';
+  import Chip from '../chip_input/Chip.svelte'
+  import ChipsInput from '../chip_input/ChipsInput.svelte'
+  import ChipInput from '../chip_input/ChipInput.svelte'
+  import TestLabel from '../chip_input/TestLabel.svelte'
   import { options } from './FormOne';
   let position;
   $: {
     APPBAR_POSITION.set(position);
   }
-  let data
-  $:{
-console.log('form data', data)
+  let data;
+  $: {
+    console.log('form data', data);
   }
 </script>
 
@@ -28,5 +33,16 @@ console.log('form data', data)
     <label for="sticky">sticky</label>
     <input type="radio" value="float" bind:group="{position}" id="float" />
     <label for="float">float</label>
+    <div class="p-12 m-12">
+      <ToggleSwitch />
+      <Chip/>
+      <Chip>Some Text</Chip>
+      <ChipInput id="test" name="label" label="Chip Input" />
+      <ChipsInput id="tests" name="label" label="Chip Input" />
+
+      <div class="my-4">
+<TestLabel />
+      </div>
+    </div>
   </div>
 </slot>

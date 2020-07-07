@@ -13,24 +13,28 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
-  import { push, pop } from "svelte-spa-router";
+  import { push, pop } from 'svelte-spa-router';
   import { fly, fade } from 'svelte/transition';
   import { TOGGLE_ICON, MARGIN_LEFT } from '../../main_store';
   import { SVG, icon_name } from '../../assets/svgs';
   import { FavIcon } from './icons';
+  import Avartar from '../avartar/Avartar.svelte';
   export let search = '';
   export let currentUser = 'Emmanuel';
   export let status = 'Service';
   export let favoriteIcons = [
     // Array<FavIcon>
-    { name: 'message' ,  callback: () => {
-       push('/books/id/false');
-      }},
+    {
+      name: 'message',
+      callback: () => {
+        push('/books/id/false');
+      }
+    },
     { name: 'check_square' },
     {
       name: 'mail',
       callback: () => {
-       push('/books/id/true');
+        push('/books/id/true');
       }
     },
     { name: 'star', classNames: 'text-warning focus:fill-current' }
@@ -39,9 +43,7 @@
 </script>
 
 <!-- App Bar -->
-<div 
-  class="flex justify-between px-2 py-3"
->
+<div class="flex justify-between px-2 py-3">
   {#if searching}
     <div class="flex items-center w-full" in:fly="{{ x: 20, duration: 500 }}">
       <div class="flex items-center flex-1 ">
@@ -117,13 +119,7 @@
           {status}
         </span>
       </div>
-      <div
-        class="inline-flex items-center w-10 h-10 mx-2 align-middle border-0 rounded-full select-none bg-primary "
-      >
-        <span class="self-center mx-auto font-semibold text-cadetblue">
-          <slot name="avartar">A</slot>
-        </span>
-      </div>
+      <Avartar />
     </div>
   {/if}
 </div>
