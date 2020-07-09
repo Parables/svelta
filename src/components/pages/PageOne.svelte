@@ -34,7 +34,9 @@
     <input type="radio" value="float" bind:group="{position}" id="float" />
     <label for="float">float</label>
     <div class="p-12 m-12">
-      <ToggleSwitch />
+      <div class="m-10 ">
+      <ToggleSwitch on:click="{()=> console.log('toggle is clciked')}" />
+      </div>
       <Chip/>
       <Chip>Some Text</Chip>
       <ChipInput id="test" name="label" label="Chip Input" />

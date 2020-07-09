@@ -33,7 +33,7 @@ Sorry, I don't like caffeine, neither does PayPal work in my country(Ghana) but 
 - [x] Form Builder(Make dynamic responsive forms with JS or TS)
 - [ ] Form components
    - [x] TextField
-   - [ ] Toggle Switch
+   - [x] Toggle Switch
    - [ ] Chips/Tags
    - [ ]  Chip/Tags input
    - [ ]  Checkbox
