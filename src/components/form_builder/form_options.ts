@@ -37,7 +37,7 @@ export interface Field {
 }
 
 
-interface Items {
+export interface Items {
     id: string
     value: string
     label?: string

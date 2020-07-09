@@ -4,6 +4,7 @@
   import { APPBAR_POSITION } from '../../main_store';
   import FormBuilder from '../form_builder/FormBuilder.svelte';
   import ToggleSwitch from '../toggle_switch/ToggleSwitch.svelte';
+  import RadioButton from '../radio_button/RadioButton.svelte'
   import Chip from '../chip_input/Chip.svelte'
   import ChipsInput from '../chip_input/ChipsInput.svelte'
   import ChipInput from '../chip_input/ChipInput.svelte'
@@ -14,8 +15,9 @@
     APPBAR_POSITION.set(position);
   }
   let data;
+  let value
   $: {
-    console.log('form data', data);
+    console.log('form data', data, value);
   }
 </script>
 
@@ -35,7 +37,8 @@
     <label for="float">float</label>
     <div class="p-12 m-12">
       <div class="m-10 ">
-      <ToggleSwitch on:click="{()=> console.log('toggle is clciked')}" />
+      <ToggleSwitch on:click="{(e)=> console.log('toggle is clciked', e)}" />
+        <RadioButton bind:value on:click="{(e)=> console.log('toggle is clciked', e)}"/>
       </div>
       <Chip/>
       <Chip>Some Text</Chip>
