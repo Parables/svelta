@@ -30,7 +30,7 @@ Sorry, I don't like caffeine, neither does PayPal work in my country(Ghana) but 
 - [x] App Bar
 - [x] Breadcrumb
 - [x] Side Menu with Svelte-SPA-Router
-- [x] Form Builder(Make dynamic forms with JS or TS)
+- [x] Form Builder(Make dynamic responsive forms with JS or TS)
 - [ ] Form components
    - [x] TextField
    - [ ] Toggle Switch
