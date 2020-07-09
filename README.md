@@ -14,7 +14,7 @@ Why make another UI component kit when we already got [Smelte](https://smeltejs.
 I must say that I really love them but I really want to take full control and have the ability to mess up the components my way to let it flow with my stlye. Svelta was inspired by them.
 
 ### How to use it?
-**Option 1 (Recommended):** Star this repo(it means a lot to me) and just dig into the component folder and copy-paste the code in your project. This way you can temper with the components anyhow you want to and break things and if things get messy, just copy-paste again. Also, no additional files from npm
+**Option 1 (Recommended):** Star this repo(it means a lot to me) and fork this repo or just dig into the component folder and copy-paste the component you need into your project. This way you can temper with the components anyhow you want to and break things and if things get messy, just copy-paste again. Also, no additional files from npm
 Note: Some components depend on others, so be sure to include them or write up yours. And don't forget to check the import paths.
 
 
