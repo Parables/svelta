@@ -27,11 +27,11 @@ Worrying about this repo being maintained regularly? Be rest assured. I use thes
 Sorry, I don't like caffeine, neither does PayPal work in my country(Ghana) but if you want to support me, a star on this repo is priceless to me.
 
 ### Components in this repo
-- App Bar
-- Breadcrumb
-- Side Menu with Svelte-SPA-Router
-- Form Builder(Make dynamic forms with JS or TS)
-- Form components
+- [x] App Bar
+- [x] Breadcrumb
+- [x] Side Menu with Svelte-SPA-Router
+- [x] Form Builder(Make dynamic forms with JS or TS)
+- [ ] Form components
    - [x] TextField
    - [ ] Toggle Switch
    - [ ] Chips/Tags
