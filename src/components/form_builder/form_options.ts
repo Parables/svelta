@@ -19,7 +19,7 @@ export interface Field {
     items?: Items[]
     multiSelect?: boolean
     readonly?: boolean
-    variant?: "outlined" | "standard" | "normal"
+    variant?: "outlined" | "material" | "default"
     validate?: string[]
     leadingIcon?: boolean
     trailingIcon?: boolean
@@ -37,7 +37,7 @@ export interface Field {
 }
 
 
-export interface Items {
+interface Items {
     id: string
     value: string
     label?: string

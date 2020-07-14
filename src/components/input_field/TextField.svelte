@@ -2,9 +2,9 @@
   import { SVG } from '../../assets/svgs';
   import { createEventDispatcher, onMount } from 'svelte';
   const dispatch = createEventDispatcher();
-  let active = false;
   let float = false;
   // default classes
+  export let active = false;
   export let id = '';
   export let name = '';
   export let label = '';
@@ -19,9 +19,9 @@
   export let colors = ['comet', 'primary', 'cadetblue']; //bg, focus, blur
   export let width = 'w-full';
   export let height = 'h-8';
-  export let variant = 'normal'; //|"standard" | "outlined"
+  export let variant = 'default'; //|"material" | "outlined"
   export let startIcon = false;
-  export let endIcon = false;
+  export let endIcon = false; 
   export let validators = [];
   export let onInput = null;
   export let onFocus = null;
@@ -47,19 +47,25 @@
     });
   }
 
-  let h, top;
+  let fullHeight, labelHeight, iconHeight, iconWidth, labelTop, iconTop, xy;
   $: {
-    top = Math.trunc(h / 8) - 2;
-    console.log('height', h, top);
+    // find the midHeight by subtracting midFullHeight - midLabelHeight
+    labelTop = Math.trunc(fullHeight / 2)-Math.trunc(labelHeight / 2) ;
+      iconTop = Math.trunc(fullHeight / 2)-Math.trunc(iconHeight / 2);
+   //-8 for the internal mx-2 of SVG and the left-1 of the SVG span element,
+   // +8 for the border-2. Adjust per your preference
+    xy = active? `-${startIcon ? Math.trunc(iconWidth-8): 0}px,-${variant==='outlined'?labelTop+8: labelTop}px`:`` 
+  console.log('height', fullHeight, labelHeight, iconHeight, labelTop, iconTop);
   }
+
   let variantStyle;
   $: {
     variantStyle =
       variant === 'outlined'
         ? `border-solid rounded ${active ? ' border-2 ' : ' border '}`
-        : variant === 'standard'
+        : variant === 'material'
         ? `border-t-0 border-l-0 border-r-0 border-b bg-${colors[0]} 
-           ${active ? ' border-b-2 ' : ' border-b '} ${h < 49 ? ' pt-2 ' : ''}`
+           ${active ? ' border-b-2 ' : ' border-b '}`
         : `border-solid rounded bg-${colors[0]}  ${
             active ? ' border-2 ' : ' border '
           }`;
@@ -67,17 +73,17 @@
 </script>
 
 <div class=" {width} {wrapperClass}">
-  {#if variant==='normal'}
+  {#if variant==='default'}
   <label for="{id}" class="pl-1 text-xs select-none text-{active? colors[1] :colors[2]}">{label}</label>
 {/if}
   <div
-    bind:clientHeight="{h}"
+    bind:clientHeight="{fullHeight}"
     class="{variantStyle}
-    {active ? `text-${colors[1]} border-${colors[1]}` : variant==='normal'? `text-${colors[2]} border-transparent`: `text-${colors[2]} border-${colors[2]}`}"
+    {active ? `text-${colors[1]} border-${colors[1]}` : variant==='default'? `text-${colors[2]} border-transparent`: `text-${colors[2]} border-${colors[2]}`}"
   >
     {#if startIcon}
-      <span
-        class="absolute select-none top-{top} left-1 {active ? `text-${colors[1]}` : `text-${colors[2]}`}
+      <span bind:clientHeight="{iconHeight}" bind:clientWidth="{iconWidth}" style="top:{iconTop};"
+        class="absolute select-none left-1 {active ? `text-${colors[1]}` : `text-${colors[2]}`}
         {iconsClass}
         {leadingIconClass}"
         on:click="{() => {
@@ -90,12 +96,12 @@
         </slot>
       </span>
     {/if}
-    {#if variant !== 'normal'}
-    <label
-        for="{id}"
-        class=" select-none leading-none absolute top-{top} text-sm {startIcon ? 'left-8' : 'left-1'}
-        inline-block w-auto m-0 px-2 py-0 origin-center transition duration-300
-        bg-{colors[0]} bg-transparent {float ? `transform translate-x-0 -translate-y-${variant === 'outlined' ? top + 2 : top - 1} scale-90 ` : ''}
+    {#if variant !== 'default'}
+     <label bind:clientHeight="{labelHeight}"
+        for="{id}" style="top:{labelTop};  {float? ` transform: translate(${xy}); `:''}"
+        class=" select-none leading-none absolute text-sm {startIcon ? 'left-8' : 'left-1'}
+        inline-block w-auto m-0 px-1 py-0 origin-center transition duration-300
+        bg-{colors[0]} bg-transparent scale-90
         {active ? `text-${colors[1]}` : `text-${colors[2]}`}
         {labelClass}"
       >
@@ -111,22 +117,22 @@
       {type}
       {readonly}
       autocomplete="off"
-      placeholder="{variant === 'normal' ? placeholder : ''}"
+      placeholder="{variant === 'default' ? placeholder : ''}"
+      on:blur
       on:blur="{() => {
         active = false;
         float = value !== '';
-        dispatch('blur');
         if (onBlur) onBlur();
       }}"
+      on:input
       on:input="{(e) => {
         value = e.target.value
-        dispatch('input');
         if (onInput) onInput();
       }}"
+      on:focus
       on:focus="{() => {
         active = true;
         float = true;
-        dispatch('focus');
         if (onFocus) onFocus();
       }}"
       class=" block w-full {height}
@@ -136,10 +142,11 @@
     />
 
     {#if endIcon}
-      <span
-        class="absolute select-none top-{top} right-2 {active ? `text-${colors[1]}` : `text-${colors[2]}`}
+      <span bind:clientHeight="{iconHeight}" style="top:{iconTop};"
+        class="absolute select-none right-2 {active ? `text-${colors[1]}` : `text-${colors[2]}`}
         {iconsClass}
         {trailingIconClass}"
+        on:click
         on:click="{() => {
           dispatch('iconClicked', { icon: 'last' });
           if (onEndIconClicked) onEndIconClicked();

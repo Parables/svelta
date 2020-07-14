@@ -10,6 +10,11 @@ module.exports = {
       ...spacing,
       fontFamily: {
         'mons': 'Montserrat,Helvetica,Arial,sans-serif'
+      }, boxShadow: {
+        haiti: '0px -10px 50px 5px #10163A',
+        primary: '0px 0px 5px 2px #7367F0',
+        blurright: '',
+        blurleft: '0 35px 60px -15px rgba(0, 0, 0, .3)',
       },
       colors: {
         primary: '#7367F0',
@@ -22,17 +27,17 @@ module.exports = {
         cometdeep: '#222744',
         cararra: '#DDE8FD'
       },
+      maxHeight: theme => ({
+        ...theme('spacing'),
+      }),
       transitionProperty: {
         width: 'width',
-        display: 'display'
-      }, boxShadow: {
-        haiti: '0px -10px 50px 5px #10163A',
-        primary: '0px 0px 5px 2px #7367F0',
-        blurright: '',
-        blurleft: '0 35px 60px -15px rgba(0, 0, 0, .3)',
-      }
+      },
     },
   },
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+    textColor: ['responsive', 'hover', 'focus', 'active'],
+  },
   plugins: [],
 }

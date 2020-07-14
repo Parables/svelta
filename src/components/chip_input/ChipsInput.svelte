@@ -31,7 +31,7 @@
   let lastIndex = 0;
   const tempHolder = placeholder;
   let filteredOptions = [];
-  let dropOptions = [];
+  let dropOptions = ["Item One", "Item Two"];
   let defaultLabelStyle =
     'top: 0.75em; left: 0.75em; transition: transform 0.25s, opacity 0.25s, padding 0.25s ease-in-out; transform-origin: 0 0;';
   let floatingState =
