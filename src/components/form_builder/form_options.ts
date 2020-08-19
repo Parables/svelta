@@ -1,7 +1,7 @@
 import { number } from "yup"
 
-export type FieldType = "text" | "email" | "password" | "tel" | "date" |
-    "number" | "radio" | "checkbox" | "chip" | "chipinput" | "select" | "range"
+export type FieldType = "text" | "email" | "password" | "tel" | "date" | "number" |
+"typeahead" | "radio" | "checkbox" | "chip" | "chipinput" | "select" | "range"
 
 export interface Field {
     id: string
@@ -9,31 +9,24 @@ export interface Field {
     label: string
     type?: FieldType
     placeholder?: string
-    hint?: string
-    colors?: string[] //bg, focus, blur
+    colors?: any 
     width?: string
     height?: string
+    margin?: string
     min?: number
     max?: number
     step?: number
-    items?: Items[]
+    items?: Items[] | []
+    passwordChar?: string
     multiSelect?: boolean
     readonly?: boolean
     variant?: "outlined" | "material" | "default"
+    mask?: Mask
     validate?: string[]
-    leadingIcon?: boolean
-    trailingIcon?: boolean
+    startIcon?: boolean
+    endIcon?: boolean
     validators?: any[]
-    onInput?: null
-    onFocus?: null
-    onBlur?: null
-    wrapperClass?: string
-    inputClass?: string
-    labelClass?: string
-    hintClass?: string
-    iconsClass?: string
-    leadingIconClass?: string
-    trailingIconClass?: string
+   
 }
 
 
@@ -48,11 +41,20 @@ export interface Row{
     fields: Field[]
 }
 export interface Section {
-    title: string
+    title?: string
     class?: string
-    rows: Row[]
+    rows?: Row[]
 }
 
+export interface Mask{
+    prefix?: string
+    mask?: "phone"|"email"|"money"|"date"
+    delimiters:[] //['.', '.', '-'],
+    blocks: [] //[3, 3, 3, 2],
+    pattern: string
+    placeholder?: string
+    suffix?: string
+}
 
 export interface FormOption {
     id: string

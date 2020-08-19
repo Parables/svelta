@@ -1,6 +1,9 @@
 import { icon_name } from "src/assets/svgs"
 import PageOne from "../pages/PageOne.svelte";
 import PageTwo from '../pages/PageTwo.svelte'
+import AllStudents from "../pages/students/AllStudents.svelte";
+import RegisterStudent from '../pages/students/RegisterStudent.svelte'
+import FeesRecords from '../pages/fees/FeesRecords.svelte';
 
 export interface MenuList {
 	group: string
@@ -31,9 +34,25 @@ const MenuList: Array<MenuList> = [
 		routes: [
 			{
 				path: "/",
-				name: "Dashboard", icon: "activity", component: PageOne,
+				name: "Dashboard", icon: "activity", component: PageTwo,
 				title: "View statistics of attendance and overview , events, notifications and issues"
 			}]
+	},
+	{
+		group: "FINANCIAL",
+		routes: [
+			{
+				path: "/fees",
+				name: "Fees Records", icon: "circle", component: FeesRecords,
+				title: "Record installments of fee payment, search reciepts, generate reports",
+			},
+			{
+				path: "/transactions",
+				name: "Transactions", icon: "circle",
+				title: "Record expenses and revenue and generate reports",
+			}
+
+		]
 	},
 	{
 		group: "INVENTORY",
@@ -55,6 +74,11 @@ const MenuList: Array<MenuList> = [
 						title: "Record books recieved"
 					}
 				]
+			}
+			, {
+				path: "/Past Questions",
+				name: "Past Questions", icon: "book",
+				title: "Manage past examination questions",
 			}
 		]
 	},
@@ -83,8 +107,8 @@ const MenuList: Array<MenuList> = [
 		{
 			path: "/students",
 			name: "Students", icon: "student",
-			title: "View and manage students data",
-			params: [{ param: '/:id/:new?', name: 'Register Student,Edit Student,Student Profile', component: PageOne }]
+			title: "View and manage students data", component: AllStudents,
+			params: [{ param: '/:id/:new?', name: 'Register Student,Edit Student,Student Profile', component: RegisterStudent }]
 		}, {
 			path: "/teachers",
 			name: "Lecturers", icon: "teacher",
@@ -122,23 +146,6 @@ const MenuList: Array<MenuList> = [
 				params: [{ param: '/:id/:new?', name: 'New Todo,Edit Todo,View Todos', component: PageOne }]
 			}]
 	},
-
-	{
-		group: "FINANCIAL",
-		routes: [
-			{
-				path: "/fees",
-				name: "Fees Records", icon: "circle",
-				title: "Record installments of fee payment, search reciepts, generate reports",
-			},
-			{
-				path: "/transactions",
-				name: "Transactions", icon: "circle",
-				title: "Record expenses and revenue and generate reports",
-			}
-
-		]
-	}
 ]
 
 

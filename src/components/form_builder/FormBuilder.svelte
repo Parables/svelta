@@ -22,7 +22,7 @@ export let data = {}
             <!-- "radio" | "checkbox" | "chip" | "chipinput" | "select" | "range" -->
             {#if f.type === 'radio' || f.type === 'checkbox' || f.type === 'chip'}
               <p>single and multi select items</p>
-            {:else if f.type === 'chipinput' || f.type === 'select'}
+            {:else if f.type === 'chipinput' || f.type === 'select' || f.type === "typeahead"}
               <p>combo box dropdown field goes here</p>
             {:else if f.type === 'range'}
               <p>Slider range picker goes here</p>

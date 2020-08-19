@@ -3,22 +3,18 @@
   let dispatch = createEventDispatcher();
   import { APPBAR_POSITION } from '../../main_store';
   import FormBuilder from '../form_builder/FormBuilder.svelte';
-  import ToggleSwitch from '../toggle_switch/ToggleSwitch.svelte';
-  import RadioButton from '../radio_button/RadioButton.svelte'
-  import Chip from '../chip_input/Chip.svelte'
-  import ChipsInput from '../chip_input/ChipsInput.svelte'
-  import ChipInput from '../chip_input/ChipInput.svelte'
-  import TestLabel from '../chip_input/TestLabel.svelte'
   import { options } from './FormOne';
+import TextField from '../input_field/TextField.svelte';
   let position;
   $: {
     APPBAR_POSITION.set(position);
   }
   let data;
-  let value
   $: {
-    console.log('form data', data, value);
+    console.log('form data', data);
   }
+
+ 
 </script>
 
 <slot>
@@ -27,7 +23,7 @@
     <FormBuilder {options} bind:data />
   </div>
   <!-- Some content end -->
-  <div class="w-full my-2 text-black bg-white rounded-md h-205">
+  <div class="w-full h-screen my-2 mb-20 text-black bg-white rounded-md">
     I'm a big useles card just taking up space
     <input type="radio" value="static" bind:group="{position}" id="static" />
     <label for="static">static</label>
@@ -35,19 +31,7 @@
     <label for="sticky">sticky</label>
     <input type="radio" value="float" bind:group="{position}" id="float" />
     <label for="float">float</label>
-    <div class="p-12 m-12">
-      <div class="m-10 ">
-      <ToggleSwitch on:click="{(e)=> console.log('toggle is clciked', e)}" />
-        <RadioButton bind:value on:click="{(e)=> console.log('toggle is clciked', e)}"/>
-      </div>
-      <Chip/>
-      <Chip>Some Text</Chip>
-      <ChipInput id="test" name="label" label="Chip Input" />
-      <ChipsInput id="tests" name="label" label="Chip Input" />
-
-      <div class="my-4">
-<TestLabel />
-      </div>
+    <div class="m-10">      
     </div>
   </div>
 </slot>
