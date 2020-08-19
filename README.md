@@ -32,13 +32,13 @@ Sorry, I don't like caffeine, neither does PayPal work in my country(Ghana) but 
 - [x] Side Menu with Svelte-SPA-Router
 - [x] Form Builder(Make dynamic responsive forms with JS or TS)
 - [ ] Form components
-   - [x] TextField
+   - [x] TextField   
+   - [x]  Autocomplete/Type ahead input
    - [x] Toggle Switch
    - [ ] Chips/Tags
    - [ ]  Chip/Tags input
    - [ ]  Checkbox
    - [ ]  Radio button
-   - [ ]  Autocomplete/Type ahead input
    - [ ]  SelectField
    - [ ]  File input
    - [ ] Want more? Create an issue.
