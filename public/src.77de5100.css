@@ -1,0 +1,12 @@
+input.svelte-ueo696:-webkit-autofill,input.svelte-ueo696:-webkit-autofill:hover,input.svelte-ueo696:-webkit-autofill:focus{
+  border:1px solid #5a67d8;
+  -webkit-text-fill-color:#5a67d8;
+  -webkit-box-shadow:0 0 0px 1000px white inset;
+  box-shadow:0 0 0px 1000px white inset;
+  transition:background-color 5000s ease-in-out 0s
+}
+.cell.svelte-mjgmri{
+  display:inline-block;
+  text-align:center;
+  vertical-align:middle
+}
